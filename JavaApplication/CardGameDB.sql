@@ -60,15 +60,53 @@ CREATE TABLE Unique_Card (
 
 DROP TABLE IF EXISTS `Game`;
 CREATE TABLE Game (
+    gameID INT UNSIGNED NOT NULL,
+    `datetime` DATETIME,
+    winner VARCHAR(255),
+    loser VARCHAR(255),
 
+    PRIMARY KEY (gameID),
+    FOREIGN KEY (winner) REFERENCES Player(username),
+    FOREIGN KEY (loser) REFERENCES Player(username)
 );
+
+-- weak entities
 
 DROP TABLE IF EXISTS `Season_Peak`;
 CREATE TABLE Season_Peak (
+    season INT NOT NULL,
+    player VARCHAR(255),
 
+    gamesplayed INT,
+    peakMMR INT,
+
+    FOREIGN KEY (player) REFERENCES Player(username)
 );
 
 DROP TABLE IF EXISTS `Move`;
 CREATE TABLE Move (
+    seed VARCHAR(255),
+    gameID INT UNSIGNED NOT NULL,
 
+    FOREIGN KEY (gameID) REFERENCES Game(gameID)
+);
+
+-- relation tables
+
+DROP TABLE IF EXISTS `HasActive`;
+CREATE TABLE HasActive (
+    player VARCHAR(255),
+    cardID INT UNSIGNED NOT NULL,
+
+    FOREIGN KEY (player) REFERENCES Player(username),
+    FOREIGN KEY (cardID) REFERENCES Card(cardID)
+);
+
+DROP TABLE IF EXISTS `Bans`;
+CREATE TABLE Bans (
+    player VARCHAR(255),
+    `admin` VARCHAR(255),
+
+    FOREIGN KEY (player) REFERENCES Player(username),
+    FOREIGN KEY (admin) REFERENCES Admin(username)
 );

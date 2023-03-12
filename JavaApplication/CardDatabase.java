@@ -79,7 +79,7 @@ public class CardDatabase {
      * Initializes connection to the database
      * @throws DBConnectException
      */
-    public void initializeConnection() throws DBConnectException{
+    private void initializeConnection() throws DBConnectException{
         try {
             dbConnect = DriverManager.getConnection(DBURL, USERNAME, PASSWORD);
         } catch (SQLException e) {

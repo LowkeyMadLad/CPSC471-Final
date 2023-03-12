@@ -1,6 +1,9 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class CardGame {
+    private static int id;
+
     private Player player1;
     private Player player2;
 
@@ -15,16 +18,15 @@ public class CardGame {
         
     }
 
-    public String runGame(){
-
-        return "hi";
-    }
-
-    public void readGame(String seed){
+    public void replayGame(long gameID){
 
     }
 
-    public void saveGameToDB(){
+    public void readMove(String seed){
+
+    }
+
+    public void saveGameToDB(long gameid, ArrayList<String> moves){
 
     }
 

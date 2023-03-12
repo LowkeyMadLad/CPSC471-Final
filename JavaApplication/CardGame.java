@@ -1,12 +1,13 @@
+import java.sql.*;
 
 public class CardGame {
     private Player player1;
     private Player player2;
 
-
+    private static CardDatabase db = null;
 
     public CardGame(Player p1, Player p2){
-
+        db = CardDatabase.getDB();
     }
 
     // Making this static otherwise having the player arguments makes no sense

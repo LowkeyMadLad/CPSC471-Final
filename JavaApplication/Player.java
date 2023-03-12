@@ -1,13 +1,17 @@
+import java.sql.*;
+
 public class Player {
     private String username;
     private String displayname;
     private Card hand;
     private Card body;
     
+    private static CardDatabase db = null;
 
-    public Player(String username, String displayname, Card hand, Card body) {
+    public Player(String username, String displayname, Card hand, Card body) throws DBConnectException, SQLException{
+        db = CardDatabase.getDB();
         this.username = username;
-        this.displayname = displayname;
+        this.displayname = db.getPlayerName(username);
         this.hand = hand;
         this.body = body;
     }

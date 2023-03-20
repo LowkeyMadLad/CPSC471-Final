@@ -37,7 +37,8 @@ CREATE TABLE Player (
     cardID INT UNSIGNED NOT NULL,
     
     `name` VARCHAR(255),
-    `type` VARCHAR(255),
+    -- 0 = Body, 1 = Hand
+    `type` BINARY,
 
     melee INT NOT NULL,
     `range` INT NOT NULL,
@@ -109,4 +110,24 @@ CREATE TABLE Bans (
 
     FOREIGN KEY (player) REFERENCES Player(username),
     FOREIGN KEY (admin) REFERENCES Admin(username)
+);
+
+
+-- BASE GAME CARDS
+-- Type binary types: 0=body, 1=hand
+INSERT INTO `Card` (`name`, `type`, `melee`, `range`, `guard`) VALUES (
+    -- body cards
+    ('Knight', 0, 70, 0, 30),
+    ('Barbarian', 0, 100, 0, 0),
+    ('Archer', 0, 0, 100, 0),
+    ('Shield guy idfk lol', 0, 0, 0, 100),
+    ('Assassin', 0, 50, 50, 0),
+
+    -- hand cards
+    ('Sword', 1, 100, 0, 0),
+    ('Bow', 1, 0, 100, 0),
+    ('Shield', 1, 0, 0, 100),
+    ('Scythe', 1, 50, 0, 50),
+    ('Kunai', 1, 30, 70, 0),
+    ('Turret', 1, 0, 60, 40)
 );

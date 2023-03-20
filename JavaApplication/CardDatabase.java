@@ -41,22 +41,37 @@ public class CardDatabase {
         return stats;
     }
 
-    public String[] getCardNameType(long id) throws DBConnectException, SQLException{
+    public String getCardName(long id) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT name, type FROM Card WHERE cardID = ?";
+        String query = "SELECT name FROM Card WHERE cardID = ?";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
-
-        String[] strings = new String[2];     
-        strings[0] = results.getString("name");
-        strings[1] = results.getString("type");
+   
+        String result = results.getString("name");
 
         myStmt.close();
         results.close();
         dbConnect.close();
 
-        return strings;
+        return result;
+    }
+
+    // false (0) = body card, true (1) = hand card
+    public boolean getCardType(long id) throws DBConnectException, SQLException{
+        initializeConnection();
+        String query = "SELECT type FROM Card WHERE cardID = ?";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setLong(1, id);
+        ResultSet results = myStmt.executeQuery();
+   
+        boolean result = results.getBoolean("name");
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return result;
     }
 
     public String getPlayerName(String username) throws DBConnectException, SQLException{

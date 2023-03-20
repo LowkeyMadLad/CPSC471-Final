@@ -3,7 +3,7 @@ import java.sql.*;
 public class Card {
     private long id;
     private String name;
-    private String type;
+    private boolean type;
     private int meleeStat;
     private int rangeStat;
     private int guardStat;
@@ -14,22 +14,24 @@ public class Card {
         this.id = id;
         db = CardDatabase.getDB();
         int[] stats = db.getCardStats(id);
-        String[] nametype = db.getCardNameType(id);
-        if(stats.length > 3 || nametype.length > 2) { 
+        if(stats.length > 3) { 
             throw new IllegalArgumentException("Somehow invalid card attributes");
         }
         meleeStat = stats[0];
         rangeStat = stats[1];
         guardStat = stats[2];
-        name = nametype[0];
-        type = nametype[1];
+        name = db.getCardName(id);
+        type = db.getCardType(id);
     }
 
 
-    public Card(long id, String name, String type, int meleeStat, int rangeStat, int guardStat) {
+    public Card(long id, String name, boolean type, int meleeStat, int rangeStat, int guardStat) {
         this.id = id;
         this.name = name;
         this.type = type;
+        if(meleeStat + rangeStat + guardStat != 100){
+            throw new IllegalArgumentException("Invalid card stats -- do not equal 100");
+        }
         this.meleeStat = meleeStat;
         this.rangeStat = rangeStat;
         this.guardStat = guardStat;
@@ -45,7 +47,7 @@ public class Card {
         return this.name;
     }
 
-    public String getType() {
+    public boolean getType() {
         return this.type;
     }
 

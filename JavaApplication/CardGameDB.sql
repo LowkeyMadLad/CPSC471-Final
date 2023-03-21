@@ -33,7 +33,7 @@ CREATE TABLE Admin (
 );
 
 DROP TABLE IF EXISTS `Card`;
-CREATE TABLE Player (
+CREATE TABLE Card (
     cardID INT UNSIGNED NOT NULL,
     
     `name` VARCHAR(255),
@@ -63,12 +63,22 @@ DROP TABLE IF EXISTS `Game`;
 CREATE TABLE Game (
     gameID INT UNSIGNED NOT NULL,
     `datetime` DATETIME,
+
     winner VARCHAR(255),
     loser VARCHAR(255),
 
+    p1body INT UNSIGNED NOT NULL,
+    p1hand INT UNSIGNED NOT NULL,
+    p2body INT UNSIGNED NOT NULL,
+    p2hand INT UNSIGNED NOT NULL,
+
     PRIMARY KEY (gameID),
     FOREIGN KEY (winner) REFERENCES Player(username),
-    FOREIGN KEY (loser) REFERENCES Player(username)
+    FOREIGN KEY (loser) REFERENCES Player(username),
+    FOREIGN KEY (p1hand) REFERENCES Card(cardID),
+    FOREIGN KEY (p1body) REFERENCES Card(cardID),
+    FOREIGN KEY (p2body) REFERENCES Card(cardID),
+    FOREIGN KEY (p2hand) REFERENCES Card(cardID)
 );
 
 -- weak entities
@@ -94,8 +104,8 @@ CREATE TABLE Move (
 
 -- relation tables
 
-DROP TABLE IF EXISTS `HasActive`;
-CREATE TABLE HasActive (
+DROP TABLE IF EXISTS `Deck`;
+CREATE TABLE Deck (
     player VARCHAR(255),
     cardID INT UNSIGNED NOT NULL,
 
@@ -107,6 +117,7 @@ DROP TABLE IF EXISTS `Bans`;
 CREATE TABLE Bans (
     player VARCHAR(255),
     `admin` VARCHAR(255),
+    `datetime` DATETIME,
 
     FOREIGN KEY (player) REFERENCES Player(username),
     FOREIGN KEY (admin) REFERENCES Admin(username)
@@ -115,19 +126,30 @@ CREATE TABLE Bans (
 
 -- BASE GAME CARDS
 -- Type binary types: 0=body, 1=hand
-INSERT INTO `Card` (`name`, `type`, `melee`, `range`, `guard`) VALUES (
+INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES 
     -- body cards
-    ('Knight', 0, 70, 0, 30),
-    ('Barbarian', 0, 100, 0, 0),
-    ('Archer', 0, 0, 100, 0),
-    ('Shield guy idfk lol', 0, 0, 0, 100),
-    ('Assassin', 0, 50, 50, 0),
+    (001, 'Knight', 0, 70, 0, 30),
+    (002, 'Barbarian', 0, 100, 0, 0),
+    (003, 'Archer', 0, 0, 100, 0),
+    (004, 'Shield guy idfk lol', 0, 0, 0, 100),
+    (005, 'Assassin', 0, 50, 50, 0),
 
     -- hand cards
-    ('Sword', 1, 100, 0, 0),
-    ('Bow', 1, 0, 100, 0),
-    ('Shield', 1, 0, 0, 100),
-    ('Scythe', 1, 50, 0, 50),
-    ('Kunai', 1, 30, 70, 0),
-    ('Turret', 1, 0, 60, 40)
-);
+    (101, 'Sword', 1, 100, 0, 0),
+    (102, 'Bow', 1, 0, 100, 0),
+    (103, 'Shield', 1, 0, 0, 100),
+    (104, 'Scythe', 1, 50, 0, 50),
+    (105, 'Kunai', 1, 30, 70, 0),
+    (106, 'Turret', 1, 0, 60, 40)
+;
+
+-- test data
+INSERT INTO `Player` (`username`, `password`, `wins`, `losses`, `mmr`, `displayname`) VALUES 
+    ('dannyp', 'swag', 20, 5, 1000, 'pistachio'),
+    ('bob', 'bbb222', 3, 42, 150, 'bobba1'),
+    ('a1b2c3', '000', 10, 10, 500, 'testguy')
+;
+INSERT INTO `Admin` (`username`, `password`) VALUES 
+    ('admin', 'pass'),
+    ('prof', 'cpsc')
+;

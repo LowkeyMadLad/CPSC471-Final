@@ -1,22 +1,27 @@
 import java.sql.*;
 
+// Player objects exist only during a game. 
 public class Player {
     private String username;
+
+    // game attributes
     private String displayname;
     private Card hand;
     private Card body;
+    public double hp;
+    public boolean defLastTurn;
     
     private static CardDatabase db = null;
 
-    public Player(String username, String displayname, Card hand, Card body) throws DBConnectException, SQLException{
+    public Player(String username, Card hand, Card body) throws DBConnectException, SQLException{
         db = CardDatabase.getDB();
         this.username = username;
         this.displayname = db.getPlayerName(username);
         this.hand = hand;
         this.body = body;
-    }
-
-    public Player() {
+        // base hp for a game will be 300 for now
+        this.hp = 300.0;
+        this.defLastTurn = false;
     }
 
     public String getUsername() {

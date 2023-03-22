@@ -66,13 +66,36 @@ public class CardGame {
         }
         switch (choice) {
             case "A":
-                // damage is just W - L i think
-                if(enemy.defLastTurn){
-                    // half the damage?
+                double p_atkmelee = player.getHand().getMeleeStat();
+                double p_atkrange = player.getHand().getRangeStat();
+                double p_atkguard = player.getHand().getRangeStat();
+                double e_defmelee = enemy.getBody().getMeleeStat();
+                double e_defrange = enemy.getBody().getRangeStat();
+                double e_defguard = enemy.getBody().getGuardStat();
+                double damage = 0;
+                // (MOVE - [100 - STRONG]) + (MOVE - WEAK)
+                // = (2*MOVE + STRONG - WEAK - 100)
+                // ASSERT NOT NEGATIVE
+                double meleedmg = Math.max(0, 2*p_atkmelee + e_defguard - e_defrange - 100);
+                double rangedmg = Math.max(0, 2*p_atkrange + e_defmelee - e_defguard - 100);
+                double guarddmg = Math.max(0, 2*p_atkguard + e_defrange - e_defmelee - 100);
+                damage = meleedmg + rangedmg + guarddmg;
+
+                // crit chance
+                double critRNG = Math.random();
+                // defending gives you a 50% crit chance next turn
+                // otherwise default crit chance is 15%
+                if((player.defLastTurn && critRNG <= 0.5) || critRNG <= 0.15){
+                    damage *= 2;
                 }
+                // defending makes you take half damage
+                if(enemy.defLastTurn){
+                    damage = damage / 2;
+                }
+
+                player.defLastTurn = false;
                 break;
             case "D":
-
                 player.defLastTurn = true;
                 break;
             default:

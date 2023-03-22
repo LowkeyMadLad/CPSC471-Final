@@ -92,7 +92,8 @@ public class CardGame {
                 if(enemy.defLastTurn){
                     damage = damage / 2;
                 }
-
+                // deal damage and reset defense status
+                enemy.hp -= damage;
                 player.defLastTurn = false;
                 break;
             case "D":

@@ -90,7 +90,7 @@ public class CardGame {
                 }
                 // defending makes you take half damage
                 if(enemy.defLastTurn){
-                    damage = damage / 2;
+                    damage /= 2;
                 }
                 // deal damage and reset defense status
                 enemy.hp -= damage;

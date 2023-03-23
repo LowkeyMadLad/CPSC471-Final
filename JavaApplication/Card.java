@@ -1,16 +1,17 @@
 import java.sql.*;
 
 public class Card {
-    private long id;
+    private int id;
     private String name;
     private boolean type;
+    // F=body, T=hand ^^^
     private int meleeStat;
     private int rangeStat;
     private int guardStat;
 
     private static CardDatabase db = null;
 
-    public Card(long id) throws DBConnectException, SQLException{
+    public Card(int id) throws DBConnectException, SQLException{
         this.id = id;
         db = CardDatabase.getDB();
         int[] stats = db.getCardStats(id);
@@ -20,12 +21,15 @@ public class Card {
         meleeStat = stats[0];
         rangeStat = stats[1];
         guardStat = stats[2];
+        if(meleeStat + rangeStat + guardStat != 100){
+            throw new IllegalArgumentException("Invalid card stats -- do not equal 100");
+        }
         name = db.getCardName(id);
         type = db.getCardType(id);
     }
 
 
-    public Card(long id, String name, boolean type, int meleeStat, int rangeStat, int guardStat) {
+    public Card(int id, String name, boolean type, int meleeStat, int rangeStat, int guardStat) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -39,7 +43,7 @@ public class Card {
 
 
     // Only getters for now. Can generate setters with a push of a button if needed
-    public long getId() {
+    public int getId() {
         return this.id;
     }
 

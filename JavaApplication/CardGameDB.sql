@@ -131,8 +131,11 @@ INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES
     (001, 'Knight', 0, 70, 0, 30),
     (002, 'Barbarian', 0, 100, 0, 0),
     (003, 'Archer', 0, 0, 100, 0),
-    (004, 'Shield guy idfk lol', 0, 0, 0, 100),
+    (004, 'Paladin', 0, 0, 0, 100),
     (005, 'Assassin', 0, 50, 50, 0),
+    (006, 'Tower', 0, 0, 20, 80),
+    (007, 'Ace', 0, 40, 30, 30),
+    (008, 'Steve', 0, 20, 60, 20),
 
     -- hand cards
     (101, 'Sword', 1, 100, 0, 0),
@@ -140,7 +143,9 @@ INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES
     (103, 'Shield', 1, 0, 0, 100),
     (104, 'Scythe', 1, 50, 0, 50),
     (105, 'Kunai', 1, 30, 70, 0),
-    (106, 'Turret', 1, 0, 60, 40)
+    (106, 'Turret', 1, 0, 60, 40),
+    (107, 'Halberd', 1, 40, 40, 20),
+    (108, 'Bomb', 1, 60, 30, 10)
 ;
 
 -- test data

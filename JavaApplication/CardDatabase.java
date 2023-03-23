@@ -22,11 +22,11 @@ public class CardDatabase {
         return instance;
     }
 
-    public int[] getCardStats(long id) throws DBConnectException, SQLException{
+    public int[] getCardStats(int id) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT melee, range, guard FROM Card WHERE cardID = ?";
+        String query = "SELECT melee, range, guard FROM Card WHERE cardID = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
-        myStmt.setLong(1, id);
+        myStmt.setInt(1, id);
         ResultSet results = myStmt.executeQuery();
 
         int[] stats = new int[3];     
@@ -43,7 +43,7 @@ public class CardDatabase {
 
     public String getCardName(long id) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT name FROM Card WHERE cardID = ?";
+        String query = "SELECT name FROM Card WHERE cardID = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
@@ -60,7 +60,7 @@ public class CardDatabase {
     // false (0) = body card, true (1) = hand card
     public boolean getCardType(long id) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT type FROM Card WHERE cardID = ?";
+        String query = "SELECT type FROM Card WHERE cardID = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
@@ -76,7 +76,7 @@ public class CardDatabase {
 
     public String getPlayerName(String username) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT displayname FROM Player WHERE username = ?";
+        String query = "SELECT displayname FROM Player WHERE username = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setString(1, username);
         ResultSet results = myStmt.executeQuery();
@@ -99,7 +99,8 @@ public class CardDatabase {
             dbConnect = DriverManager.getConnection(DBURL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DBConnectException("Failed to connect to the Database. Check DBURL, USERNAME, PASSWORD.");
+            String errmsg = e.getMessage();
+            throw new DBConnectException("Failed to connect to the Database. Check DBURL, USERNAME, PASSWORD.\n" + errmsg);
         }
 
         if (dbConnect == null) {

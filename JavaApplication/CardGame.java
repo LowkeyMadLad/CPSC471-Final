@@ -26,10 +26,8 @@ public class CardGame {
         String moveseed;
         
         while(player1.hp > 0 || player2.hp > 0){
-            moveseed = "";
-            
-            playerMove(p1turn);
-
+            moveseed = playerMove(p1turn);
+            readMove(moveseed);
             moves.add(moveseed);
             p1turn = !p1turn;
         }
@@ -37,6 +35,10 @@ public class CardGame {
     private String playerMove(boolean p1){
         Player player;
         Player enemy;
+        // SEED: {player}{crit}-{dmg} attack or {player} defend
+        // SEED: {1/2}{0/1}{xxx} or {1/2}
+        // e.g., player 1 attacks for 105 dmg (no crit) = "10-105"
+        // e.g., player 2 defends = "2"
         String moveseed;
         if(p1){
             player = player1;
@@ -87,6 +89,9 @@ public class CardGame {
                 // otherwise default crit chance is 15%
                 if((player.defLastTurn && critRNG <= 0.5) || critRNG <= 0.15){
                     damage *= 2;
+                    moveseed += "1";
+                } else {
+                    moveseed += "0";
                 }
                 // defending makes you take half damage
                 if(enemy.defLastTurn){
@@ -94,6 +99,7 @@ public class CardGame {
                 }
                 // deal damage and reset defense status
                 enemy.hp -= damage;
+                moveseed += "-" + String.valueOf(damage);
                 player.defLastTurn = false;
                 break;
             case "D":
@@ -119,7 +125,28 @@ public class CardGame {
 
     }
     private void readMove(String seed){
-
+        // SEED: {player}{crit}-{dmg} attack or {player} defend
+        // SEED: {1/2}{0/1}{xxx} or {1/2}
+        // e.g., player 1 attacks for 105 dmg (no crit) = "10-105"
+        // e.g., player 2 defends = "2"
+        if(seed.charAt(0)!='1' || seed.charAt(0)!='2'){
+            throw new IllegalArgumentException("Invalid seed");
+        }
+        boolean p1turn = seed.charAt(0) == '1';
+        if(seed.length() == 1){
+            System.out.println("Player " + seed.charAt(0) + " defended.");
+            return;
+        }
+        if(seed.charAt(1)!='0' || seed.charAt(1)!='1'){
+            throw new IllegalArgumentException("Invalid seed");
+        }
+        System.out.println("Player " + seed.charAt(0) + " attacked.");
+        boolean crit = seed.charAt(1) == '1';
+        if(crit){
+            System.out.println("CRITICAL HIT!");
+        }
+        String damage = seed.substring(3, seed.length());
+        System.out.println("Dealt " + damage + " damage.");
     }
 
     public Player getPlayer1() {

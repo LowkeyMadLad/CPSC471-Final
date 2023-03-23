@@ -12,7 +12,7 @@ public class SampleMain {
         Card p2H = new Card(105);
 
         // hard coded players
-        Player p1 = new Player("bob", p2H, p2B);
+        Player p1 = new Player("bob", p1H, p1B);
         Player p2 = new Player("dannyp", p2H, p2B);
 
         // how the card picking should work:
@@ -22,6 +22,7 @@ public class SampleMain {
         // then p2 chooses both their hand and body card, then p1 chooses their
         // body card. players can see eachothers picks but not decks.
 
-        
+        CardGame game = new CardGame(p1, p2);
+        game.playGame();
     }
 }

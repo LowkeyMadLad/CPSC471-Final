@@ -139,13 +139,13 @@ INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES
 
     -- hand cards
     (101, 'Sword', 1, 100, 0, 0),
-    (102, 'Bow', 1, 0, 100, 0),
+    (102, 'Bow', 1, 0, 100, 0),         -- done
     (103, 'Shield', 1, 0, 0, 100),
     (104, 'Scythe', 1, 50, 0, 50),
     (105, 'Kunai', 1, 30, 70, 0),
     (106, 'Turret', 1, 0, 60, 40),
-    (107, 'Halberd', 1, 40, 40, 20),
-    (108, 'Bomb', 1, 60, 30, 10)
+    (107, 'Halberd', 1, 40, 40, 20),    -- done
+    (108, 'Bomb', 1, 60, 30, 10)        -- done
 ;
 
 -- test data

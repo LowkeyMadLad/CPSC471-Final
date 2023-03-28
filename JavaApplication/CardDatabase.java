@@ -1,5 +1,6 @@
 import java.sql.*;
-// import java.util.ArrayList;
+import java.util.ArrayList;
+// import java.time.LocalDate;
 
 public class CardDatabase {
     private static CardDatabase instance = null;
@@ -113,6 +114,65 @@ public class CardDatabase {
         dbConnect.close();
 
         return displayname;
+    }
+
+    public void uploadGame(String id, Date dt, Player player1, Player player2) throws DBConnectException, SQLException{
+        initializeConnection();
+        String query = "INSERT Game (`gameID`, `datetime`, `player1`, `player2`, `p1body`, `p1hand`, `p2body`, `p2hand`) VALUES (?,?,?,?,?,?,?,?)";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, id);
+        myStmt.setDate(2, dt);
+        myStmt.setString(3, player1.getUsername());
+        myStmt.setString(4, player2.getUsername());
+        myStmt.setInt(5, player1.getBody().getId());
+        myStmt.setInt(6, player1.getHand().getId());
+        myStmt.setInt(7, player2.getBody().getId());
+        myStmt.setInt(8, player2.getHand().getId());
+
+        int rowCount = myStmt.executeUpdate();
+        if(rowCount == 0){
+            throw new SQLException("No rows were changed.");
+        }
+        
+        myStmt.close();
+    }
+
+    public void addMove(String gameID, String moveSeed) throws DBConnectException, SQLException{
+        initializeConnection();
+        String query = "INSERT Move (seed, gameID) VALUES (?, ?)";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        // keep in mind seed is put first bc of the table
+        // but id is first in the function parameter bc its
+        // more visually intuitive
+        myStmt.setString(1, moveSeed);
+        myStmt.setString(2, gameID);
+
+        int rowCount = myStmt.executeUpdate();
+        if(rowCount == 0){
+            throw new SQLException("No rows were changed.");
+        }
+        
+        myStmt.close();
+    }
+
+    public ArrayList<String> getGameMoves(String gameid) throws DBConnectException, SQLException{
+        ArrayList<String> list = new ArrayList<String>();
+
+        initializeConnection();
+        String query = "SELECT seed FROM Move WHERE GameID = ?";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, gameid);
+        ResultSet results = myStmt.executeQuery();
+        
+        while(results.next()){
+            list.add(results.getString("seed"));
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return list;
     }
 
     /**

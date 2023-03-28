@@ -24,5 +24,7 @@ public class SampleMain {
 
         CardGame game = new CardGame(p1, p2);
         game.playGame();
+
+        // CardGame.replayGame("da97cc56-1eed-4db3-916f-fc1acc30392f");
     }
 }

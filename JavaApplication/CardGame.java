@@ -1,14 +1,18 @@
-// import java.sql.*; // not using rn?
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
+import java.time.LocalDate;
 
 public class CardGame {
-    private static int id;
+    // will use java's built in UUID for this
+    private static final String id = UUID.randomUUID().toString();;
 
     private Player player1;
     private Player player2;
 
     ArrayList<String> moves;
+    Date time;
 
     private static CardDatabase db = null;
     private Scanner reader;
@@ -20,7 +24,25 @@ public class CardGame {
         moves = new ArrayList<String>();
     }
 
-    public void playGame(){
+    public void playGame() throws DBConnectException, SQLException{
+        Date.valueOf(LocalDate.now());
+        Card p1b = player1.getBody();
+        Card p1h = player1.getHand();
+        Card p2b = player2.getBody();
+        Card p2h = player2.getHand();
+        System.out.println("PLAYER 1: " + player1.getDisplayname());
+        System.out.println("BODY: " + p1b.getName());
+        System.out.println("MELEE: "+p1b.getMeleeStat()+"   RANGE: "+p1b.getRangeStat()+"   GUARD: "+p1b.getGuardStat());
+        System.out.println("HAND: " + p1h.getName());
+        System.out.println("MELEE: "+p1h.getMeleeStat()+"   RANGE: "+p1h.getRangeStat()+"   GUARD: "+p1h.getGuardStat());
+        System.out.println();
+        System.out.println("PLAYER 2: " + player2.getDisplayname());
+        System.out.println("BODY: " + p2b.getName());
+        System.out.println("MELEE: "+p2b.getMeleeStat()+"   RANGE: "+p2b.getRangeStat()+"   GUARD: "+p2b.getGuardStat());
+        System.out.println("HAND: " + p1h.getName());
+        System.out.println("MELEE: "+p2h.getMeleeStat()+"   RANGE: "+p2h.getRangeStat()+"   GUARD: "+p2h.getGuardStat());
+        System.out.println();
+
         boolean p1turn = true;
 
         // SEED: player# + attack/defend + damage dealt
@@ -33,6 +55,7 @@ public class CardGame {
             moves.add(moveseed);
             p1turn = !p1turn;
         }
+
         Player winner;
         if(player1.hp <= 0){
             winner = player2;
@@ -41,6 +64,9 @@ public class CardGame {
         }
         System.out.println("\n GAME OVER!");
         System.out.println(winner.getDisplayname() + " wins with " + winner.hp + " health remaining!");
+        reader.close();
+
+        saveGameToDB();
     }
     private String playerMove(boolean p1){
         Player player;
@@ -80,7 +106,7 @@ public class CardGame {
             case "A":
                 double p_atkmelee = player.getHand().getMeleeStat();
                 double p_atkrange = player.getHand().getRangeStat();
-                double p_atkguard = player.getHand().getRangeStat();
+                double p_atkguard = player.getHand().getGuardStat();
                 double e_defmelee = enemy.getBody().getMeleeStat();
                 double e_defrange = enemy.getBody().getRangeStat();
                 double e_defguard = enemy.getBody().getGuardStat();
@@ -122,19 +148,21 @@ public class CardGame {
         }
         return moveseed;
     }
-    private void saveGameToDB(){
-
+    private void saveGameToDB() throws DBConnectException, SQLException{
+        db.uploadGame(id, time, player1, player2);
+        for(String move : moves){
+            db.addMove(id, move);
+        }
     }
 
-    // Making this static otherwise having the player arguments makes no sense
-    public static void updatePlayerStats(Player winner, Player loser){
-        
+    public static void replayGame(String gameID) throws DBConnectException, SQLException{
+        ArrayList<String> movelist = db.getGameMoves(gameID);
+        for (String move : movelist){
+            readMove(move);
+            System.out.println();
+        }
     }
-
-    public static void replayGame(long gameID){
-
-    }
-    private void readMove(String seed){
+    private static void readMove(String seed){
         // SEED: {player}{crit}-{dmg} attack or {player} defend
         // SEED: {1/2}{0/1}{xxx} or {1/2}
         // e.g., player 1 attacks for 105 dmg (no crit) = "10-105"

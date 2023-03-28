@@ -61,11 +61,12 @@ CREATE TABLE Unique_Card (
 
 DROP TABLE IF EXISTS `Game`;
 CREATE TABLE Game (
-    gameID INT UNSIGNED NOT NULL,
+    -- IDs will be UUIDs
+    gameID VARCHAR(255),
     `datetime` DATETIME,
 
-    winner VARCHAR(255),
-    loser VARCHAR(255),
+    player1 VARCHAR(255),
+    player2 VARCHAR(255),
 
     p1body INT UNSIGNED NOT NULL,
     p1hand INT UNSIGNED NOT NULL,
@@ -73,8 +74,8 @@ CREATE TABLE Game (
     p2hand INT UNSIGNED NOT NULL,
 
     PRIMARY KEY (gameID),
-    FOREIGN KEY (winner) REFERENCES Player(username),
-    FOREIGN KEY (loser) REFERENCES Player(username),
+    FOREIGN KEY (player1) REFERENCES Player(username),
+    FOREIGN KEY (player2) REFERENCES Player(username),
     FOREIGN KEY (p1hand) REFERENCES Card(cardID),
     FOREIGN KEY (p1body) REFERENCES Card(cardID),
     FOREIGN KEY (p2body) REFERENCES Card(cardID),
@@ -97,7 +98,7 @@ CREATE TABLE Season_Peak (
 DROP TABLE IF EXISTS `Move`;
 CREATE TABLE Move (
     seed VARCHAR(255),
-    gameID INT UNSIGNED NOT NULL,
+    gameID VARCHAR(255),
 
     FOREIGN KEY (gameID) REFERENCES Game(gameID)
 );

@@ -65,14 +65,18 @@ public class Player {
     }
 
     public void updateWL(boolean win){
-
+        if(win){
+            // db update win
+        } else {
+            // db update loss
+        }
     }
 
-    public void updateMMR(){
-
+    public void updateMMR(int points){
+        // db update mmr
     }
 
     public void updateSeasonGames(){
-
+        // db update season games
     }
 }

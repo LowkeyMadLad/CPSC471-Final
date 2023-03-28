@@ -1,4 +1,4 @@
-import java.sql.*;
+// import java.sql.*; // not using rn?
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,9 +11,11 @@ public class CardGame {
     ArrayList<String> moves;
 
     private static CardDatabase db = null;
-    
+    private Scanner reader;
 
     public CardGame(Player p1, Player p2){
+        player1 = p1;
+        player2 = p2;
         db = CardDatabase.getDB();
         moves = new ArrayList<String>();
     }
@@ -25,12 +27,20 @@ public class CardGame {
         // {1/2}{a/d}{xxx}
         String moveseed;
         
-        while(player1.hp > 0 || player2.hp > 0){
+        while(player1.hp > 0 && player2.hp > 0){
             moveseed = playerMove(p1turn);
             readMove(moveseed);
             moves.add(moveseed);
             p1turn = !p1turn;
         }
+        Player winner;
+        if(player1.hp <= 0){
+            winner = player2;
+        } else{
+            winner = player1;
+        }
+        System.out.println("\n GAME OVER!");
+        System.out.println(winner.getDisplayname() + " wins with " + winner.hp + " health remaining!");
     }
     private String playerMove(boolean p1){
         Player player;
@@ -49,10 +59,10 @@ public class CardGame {
             enemy = player1;
             moveseed = "2";
         }
-
+        System.out.println();
         String choice = "";
-        Scanner reader = new Scanner(System.in);  
-        while(!choice.equals("A") || !choice.equals("D")){
+        reader = new Scanner(System.in);  
+        while(!choice.equals("A") && !choice.equals("D")){
             // players can only defend once in a row
             if(player.defLastTurn){
                 System.out.println(player.getDisplayname() + " DEFENDED LAST ROUND.");
@@ -64,8 +74,8 @@ public class CardGame {
             System.out.println(player.getDisplayname() + " ENTER:");
             System.out.println("ATTACK (A) OR DEFEND (D): ");
             choice = reader.nextLine().toUpperCase(); 
-            reader.close();
         }
+        // reader.close(); // error-ridden rat
         switch (choice) {
             case "A":
                 double p_atkmelee = player.getHand().getMeleeStat();
@@ -129,15 +139,15 @@ public class CardGame {
         // SEED: {1/2}{0/1}{xxx} or {1/2}
         // e.g., player 1 attacks for 105 dmg (no crit) = "10-105"
         // e.g., player 2 defends = "2"
-        if(seed.charAt(0)!='1' || seed.charAt(0)!='2'){
+        if(seed.charAt(0)!='1' && seed.charAt(0)!='2'){
             throw new IllegalArgumentException("Invalid seed");
         }
-        boolean p1turn = seed.charAt(0) == '1';
+        // boolean p1turn = seed.charAt(0) == '1';
         if(seed.length() == 1){
             System.out.println("Player " + seed.charAt(0) + " defended.");
             return;
         }
-        if(seed.charAt(1)!='0' || seed.charAt(1)!='1'){
+        if(seed.charAt(1)!='0' && seed.charAt(1)!='1'){
             throw new IllegalArgumentException("Invalid seed");
         }
         System.out.println("Player " + seed.charAt(0) + " attacked.");

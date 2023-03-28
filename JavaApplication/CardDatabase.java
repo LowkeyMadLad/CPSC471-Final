@@ -24,15 +24,21 @@ public class CardDatabase {
 
     public int[] getCardStats(int id) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT melee, range, guard FROM Card WHERE cardID = ?;";
+        String query = "SELECT `melee`, `range`, `guard` FROM Card WHERE cardID = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
-        myStmt.setInt(1, id);
+        myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
 
-        int[] stats = new int[3];     
-        stats[0] = results.getInt("melee");
-        stats[1] = results.getInt("range");
-        stats[2] = results.getInt("guard");
+        int[] stats = new int[3];    
+        if(results.next()){
+            // System.out.println("testing if this runs");
+            stats[0] = results.getInt("melee");
+            stats[1] = results.getInt("range");
+            stats[2] = results.getInt("guard");
+        } else{
+            System.out.println("something broke!!!");
+            System.exit(1);
+        }
 
         myStmt.close();
         results.close();
@@ -43,12 +49,19 @@ public class CardDatabase {
 
     public String getCardName(long id) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT name FROM Card WHERE cardID = ?;";
+        String query = "SELECT `name` FROM Card WHERE cardID = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
    
-        String result = results.getString("name");
+        String result = "impossible value to have";
+        if(results.next()){
+            result = results.getString("name");
+        } else {
+            System.out.println("something broke!!!");
+            System.exit(1);
+        }
+        
 
         myStmt.close();
         results.close();
@@ -60,12 +73,18 @@ public class CardDatabase {
     // false (0) = body card, true (1) = hand card
     public boolean getCardType(long id) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT type FROM Card WHERE cardID = ?;";
+        String query = "SELECT `type` FROM Card WHERE cardID = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
    
-        boolean result = results.getBoolean("name");
+        boolean result = false; // shouldnt ever not get set by next line
+        if(results.next()){
+            result = results.getBoolean("type");
+        } else {
+            System.out.println("something broke!!!");
+            System.exit(1);
+        }
 
         myStmt.close();
         results.close();
@@ -76,12 +95,18 @@ public class CardDatabase {
 
     public String getPlayerName(String username) throws DBConnectException, SQLException{
         initializeConnection();
-        String query = "SELECT displayname FROM Player WHERE username = ?;";
+        String query = "SELECT `displayname` FROM Player WHERE `username` = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setString(1, username);
         ResultSet results = myStmt.executeQuery();
 
-        String displayname = results.getString("displayname");
+        String displayname = "you cant get this";
+        if(results.next()){
+            displayname = results.getString("displayname");
+        } else {
+            System.out.println("something broke!!!");
+            System.exit(1);
+        }
 
         myStmt.close();
         results.close();

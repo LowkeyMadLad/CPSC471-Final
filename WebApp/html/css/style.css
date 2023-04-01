@@ -50,7 +50,7 @@ nav{
     color: white;
     position: fixed;
     width: 250px;
-    height: 700px;
+    height: 750px;
     outline: #000 5px solid;
     text-align: center;
     top: 180px;
@@ -75,19 +75,27 @@ nav{
 }
 
 .card{
+    margin: auto;
     padding: 5px;
     width: 200px;
     height: 300px;
+    text-align: center;
 }
 
 .hand-card{
+    margin: auto;
     align-content: center;
-    padding: 20px;
+    text-align: center;
+    padding: 5px;
+
+    outline: #000 5px solid;
 }
 
 .body-card{
+    margin: auto;
     align-content: center;
-    padding: 20px;
+    text-align: center;
+    padding: 5px;
 }
 
 .hidden{
@@ -97,4 +105,15 @@ nav{
 
 .show{
     opacity: 1;
+}
+.selected-card-sub{
+    padding: 5px;
+    margin: auto;
+    outline: #000 5px solid;
+    width: 200px;
+    height: 300px;
+}
+
+.draggable.dragging{
+    opacity: .5;
 }

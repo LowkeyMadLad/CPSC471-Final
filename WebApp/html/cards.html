@@ -32,21 +32,20 @@
                 <h1>Cards</h1>
             </div>
             <div class="cards-display">
-                <!-- There will be a sort feature here -->
                 
                 <div class="cards-to-choose">
                     <div class="row">
                         <div class="card-holder hidden" id="card1-holder">
-                            <img src="img/small.jpg" id="card1" class="card draggable" draggable="true" >
+                            <img src="img/small.jpg" id="card1" class="card draggable hand-only" draggable="true" >
                         </div>
                         <div class="card-holder hidden" id="sword-holder">
-                            <img src="img/sword.jpg" id="sword" class="card draggable" draggable="true">
+                            <img src="img/sword.jpg" id="sword" class="card draggable hand-only" draggable="true">
                         </div>
                         <div class="card-holder hidden" id="card3-holder">
-                            <img src="img/shield.png" id="card3" class="card draggable" draggable="true">
+                            <img src="img/shield.png" id="card3" class="card draggable body-only" draggable="true">
                         </div>
                         <div class="card-holder hidden" id="card4-holder">
-                            <img src="img/small.jpg" id="card4" class="card draggable" draggable="true">
+                            <img src="img/small.jpg" id="card4" class="card draggable body-only" draggable="true">
                         </div>
                     </div>
 
@@ -54,14 +53,26 @@
                 <div class="deck-cards">
                     <h1>Deck Cards</h1>
                     <div class="hand-card">
-                        <h1>hand card</h1>
-                        <div id="hand-card-slot" class="selected-card-sub">
+                        <h1>Hand cards</h1>
+                        <div id="hand-card-slot" class="selected-card-sub slot-1 outline-unselected-hand">
+
+                        </div>
+                        <div id="hand-card-slot" class="selected-card-sub slot-2 outline-unselected-hand">
+
+                        </div>
+                        <div id="hand-card-slot" class="selected-card-sub slot-3 outline-unselected-hand">
 
                         </div>
                     </div>
                     <div class="body-card">
-                        <h1>body card</h1>
-                        <div id="body-card-slot" class="selected-card-sub"> 
+                        <h1>Body cards</h1>
+                        <div id="body-card-slot" class="selected-card-sub slot-1 outline-unselected-body"> 
+
+                        </div>
+                        <div id="body-card-slot" class="selected-card-sub slot-2 outline-unselected-body"> 
+
+                        </div>
+                        <div id="body-card-slot" class="selected-card-sub slot-3 outline-unselected-body"> 
 
                         </div>
                     </div>

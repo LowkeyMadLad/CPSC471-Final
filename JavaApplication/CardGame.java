@@ -134,6 +134,7 @@ public class CardGame {
                     damage /= 2;
                 }
                 // deal damage and reset defense status
+                damage *= randomDouble(0.9, 1.1);
                 enemy.hp -= damage;
                 moveseed += "-" + String.valueOf(damage);
                 player.defLastTurn = false;
@@ -195,4 +196,8 @@ public class CardGame {
         return this.player2;
     }
 
+
+    private double randomDouble(double min, double max) {
+        return (Math.random() * (max - min)) + min;
+    }
 }

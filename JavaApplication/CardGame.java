@@ -25,7 +25,7 @@ public class CardGame {
     }
 
     public void playGame() throws DBConnectException, SQLException{
-        Date.valueOf(LocalDate.now());
+        time = Date.valueOf(LocalDate.now());
         Card p1b = player1.getBody();
         Card p1h = player1.getHand();
         Card p2b = player2.getBody();

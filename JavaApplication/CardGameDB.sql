@@ -144,7 +144,7 @@ INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES
     (103, 'Shield', 1, 0, 0, 100),      -- done
     (104, 'Scythe', 1, 50, 0, 50),      -- done
     (105, 'Kunai', 1, 30, 70, 0),       -- done
-    (106, 'Ballista', 1, 0, 60, 40),    --  
+    (106, 'Ballista', 1, 0, 60, 40),    -- done
     (107, 'Halberd', 1, 40, 40, 20),    -- done
     (108, 'Bomb', 1, 60, 30, 10)        -- done
 ;

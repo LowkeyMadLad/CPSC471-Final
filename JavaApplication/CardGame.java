@@ -2,7 +2,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
-import java.time.LocalDate;
+// import java.time.LocalDate;
 
 public class CardGame {
     // will use java's built in UUID for this
@@ -12,7 +12,7 @@ public class CardGame {
     private Player player2;
 
     ArrayList<String> moves;
-    Date time;
+    Timestamp time;
 
     private static CardDatabase db = null;
     private Scanner reader;
@@ -25,7 +25,7 @@ public class CardGame {
     }
 
     public void playGame() throws DBConnectException, SQLException{
-        time = Date.valueOf(LocalDate.now());
+        time = new Timestamp(System.currentTimeMillis());
         Card p1b = player1.getBody();
         Card p1h = player1.getHand();
         Card p2b = player2.getBody();
@@ -62,7 +62,7 @@ public class CardGame {
         } else{
             winner = player1;
         }
-        System.out.println("\n GAME OVER!");
+        System.out.println("\nGAME OVER!");
         System.out.println(winner.getDisplayname() + " wins with " + winner.hp + " health remaining!");
         reader.close();
 

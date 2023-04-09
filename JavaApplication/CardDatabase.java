@@ -117,12 +117,12 @@ public class CardDatabase {
         return displayname;
     }
 
-    public void uploadGame(String id, Date dt, Player player1, Player player2) throws DBConnectException, SQLException{
+    public void uploadGame(String id, Timestamp dt, Player player1, Player player2) throws DBConnectException, SQLException{
         initializeConnection();
         String query = "INSERT Game (`gameID`, `datetime`, `player1`, `player2`, `p1body`, `p1hand`, `p2body`, `p2hand`) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setString(1, id);
-        myStmt.setDate(2, dt);
+        myStmt.setTimestamp(2, dt);
         myStmt.setString(3, player1.getUsername());
         myStmt.setString(4, player2.getUsername());
         myStmt.setInt(5, player1.getBody().getId());
@@ -296,7 +296,7 @@ public class CardDatabase {
         PreparedStatement stmt = dbConnect.prepareStatement(query);
         stmt.setString(1, playerToBan);
         stmt.setString(2, admin);
-        stmt.setDate(3, Date.valueOf(LocalDate.now()));
+        stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
         int rowCount = stmt.executeUpdate();
         if(rowCount == 0){
             throw new SQLException("No rows were changed.");

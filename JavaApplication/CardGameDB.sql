@@ -129,14 +129,14 @@ CREATE TABLE Bans (
 -- Type binary types: 0=body, 1=hand
 INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES 
     -- body cards
-    (001, 'Knight', 0, 70, 0, 30),      -- 
-    (002, 'Barbarian', 0, 100, 0, 0),
-    (003, 'Archer', 0, 0, 100, 0),
-    (004, 'Paladin', 0, 0, 0, 100),
-    (005, 'Assassin', 0, 50, 50, 0),
-    (006, 'Tower', 0, 0, 20, 80),
-    (007, 'Ace', 0, 40, 30, 30),
-    (008, 'Steve', 0, 20, 60, 20),
+    (001, 'Knight', 0, 70, 0, 30),      -- done
+    (002, 'Barbarian', 0, 100, 0, 0),   -- done
+    (003, 'Archer', 0, 0, 100, 0),      -- done
+    (004, 'Paladin', 0, 0, 0, 100),     -- 
+    (005, 'Assassin', 0, 50, 50, 0),    -- done
+    (006, 'Tower', 0, 0, 20, 80),       -- done
+    (007, 'Ace', 0, 40, 30, 30),        -- 
+    (008, 'Steve', 0, 20, 60, 20),      -- 
 
     -- hand cards
     (101, 'Sword', 1, 100, 0, 0),       -- done

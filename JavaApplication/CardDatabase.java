@@ -305,6 +305,23 @@ public class CardDatabase {
         stmt.close();
     }
 
+    // for front end
+    public void addCardToDeck(long cardID, String playerUsername) throws DBConnectException, SQLException {
+        initializeConnection();
+        String query = "INSERT Deck (`player`, `cardID`) VALUES (?,?)";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        // keep in mind this goes 2 then 1
+        myStmt.setLong(2, cardID);
+        myStmt.setString(1, playerUsername);
+
+        int rowCount = myStmt.executeUpdate();
+        if(rowCount == 0){
+            throw new SQLException("No rows were changed.");
+        }
+        
+        myStmt.close();
+    }
+
     /**
      * Initializes connection to the database
      * @throws DBConnectException

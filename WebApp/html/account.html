@@ -26,11 +26,23 @@
                 </div>
             </nav>
         </div>
-        <div id="content-body" class="content=main">
-            <h1>This is the account tab</h1>
+        <div id="content-body" class="content-main">
+            <h1>Account</h1>
+            <div id="login-form">
+                <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <button id="login-btn">Login</button>
+            </div>
+            <div id="user-profile" class="hidden">
+                <h2><span id="user-name"></span></h2>
+                <p>MMR: <span id="user-mmr"></span></p>
+                <p>Games played: <span id="user-games-played"></span></p>
+                <p>Wins: <span id="user-wins"></span></p>
+                <p>Losses: <span id="user-losses"></span></p>
+                <button id="logout-btn">Logout</button>
+            </div>
         </div>
     </div>
-
-
+    <script src="js/login.js"></script>
 </body>
 </html>

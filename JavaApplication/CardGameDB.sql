@@ -138,24 +138,24 @@ CREATE TABLE Bans (
 -- Type binary types: 0=body, 1=hand
 INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES 
     -- body cards
-    (001, 'Knight', 0, 70, 0, 30),      -- done
-    (002, 'Barbarian', 0, 100, 0, 0),   -- done
-    (003, 'Archer', 0, 0, 100, 0),      -- done
-    (004, 'Paladin', 0, 0, 0, 100),     -- done
-    (005, 'Assassin', 0, 50, 50, 0),    -- done
-    (006, 'Tower', 0, 0, 20, 80),       -- done
-    (007, 'Ace', 0, 40, 30, 30),        -- done
-    (008, 'Steve', 0, 20, 60, 20),      -- done
+    (001, 'Knight', 0, 70, 0, 30),      -- done //
+    (002, 'Barbarian', 0, 100, 0, 0),   -- done //
+    (003, 'Archer', 0, 0, 100, 0),      -- done //
+    (004, 'Paladin', 0, 0, 0, 100),     -- done //
+    (005, 'Assassin', 0, 50, 50, 0),    -- done //
+    (006, 'Tower', 0, 0, 20, 80),       -- done //
+    (007, 'Ace', 0, 40, 30, 30),        -- done //
+    (008, 'Steve', 0, 20, 60, 20),      -- done //
 
     -- hand cards
-    (101, 'Sword', 1, 100, 0, 0),       -- done
-    (102, 'Bow', 1, 0, 100, 0),         -- done
-    (103, 'Shield', 1, 0, 0, 100),      -- done
-    (104, 'Scythe', 1, 50, 0, 50),      -- done
-    (105, 'Kunai', 1, 30, 70, 0),       -- done
-    (106, 'Ballista', 1, 0, 60, 40),    -- done
-    (107, 'Halberd', 1, 40, 40, 20),    -- done
-    (108, 'Bomb', 1, 60, 30, 10)        -- done
+    (101, 'Sword', 1, 100, 0, 0),       -- done //
+    (102, 'Bow', 1, 0, 100, 0),         -- done //
+    (103, 'Shield', 1, 0, 0, 100),      -- done //
+    (104, 'Scythe', 1, 50, 0, 50),      -- done //
+    (105, 'Kunai', 1, 30, 70, 0),       -- done //
+    (106, 'Ballista', 1, 0, 60, 40),    -- done //
+    (107, 'Halberd', 1, 40, 40, 20),    -- done //
+    (108, 'Bomb', 1, 60, 30, 10)        -- done //
 ;
 
 -- test data

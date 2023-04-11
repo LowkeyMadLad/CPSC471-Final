@@ -1,0 +1,211 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(to right, #535F8D, #BA5C12);
+}
+nav{
+    width: 80%;
+    position: sticky;
+    margin: 20px auto;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    top: 20;
+}
+
+.nav-links{
+    flex: 1;
+    text-align: right;
+}
+
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+}
+
+.nav-links ul li a{
+    color: #000;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.page-title{
+    position: relative;
+    padding-left: 100px;
+    font-size: 36px;
+}
+
+.inline-players{
+    position: relative;
+    display: inline-block;
+    outline: #000 5px solid;
+    width: 45%;
+    vertical-align: top;
+    margin: 2%;
+    height: 800px;
+}
+
+/* This section is for the games section as of now. Making a new section for everything else*/
+.player-text{
+    text-align: center;
+}
+.portrait{
+    position: relative;
+    outline: black 5px solid;
+    margin: 10px;
+    height: 50%;
+    min-height: 500px;
+}
+.player-photo{
+    position: absolute;
+    display: inline-block;
+    outline: #000 5px solid;
+    width: 500px;
+    height: 100%;
+}
+.card-info{
+    position: absolute;
+    display: inline-block;
+    left: 505px;
+}
+
+.p1-card-display{
+    position: relative;
+    width: 150px;
+    height: 225px;
+    outline: blue 5px solid;
+    vertical-align: middle;
+    margin-left: 25px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+.p1-card-display:last-child{
+    margin-top: 0%;
+    margin-bottom: 20px;
+}
+.card-actual{
+    width: 150px;
+    height: 225px;
+}
+
+.player-photo-actual{
+    width: 485px;
+    height: 485px;
+}
+.p1-card-stats{
+    position: absolute;
+    left: 700px;
+    outline: #000 5px solid;
+    margin-top: 20px;
+    margin-left: 5px;
+    width: auto;
+    height: auto;
+    font-size: 24px;
+}
+h5{
+    font-size: 16px;
+}
+/* This is the end of the section*/
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 4fr 3fr 3fr;
+    grid-template-rows: 250px 250px;
+    gap: 10px;
+    grid-template-areas: 
+        "player-photo hand-card-display hand-card-stats-display"
+        "player-photo body-card-display body-card-stats-display"
+    ;
+
+}
+.player-photo-holder{
+    grid-area: player-photo;
+}
+
+.hand-card-display{
+    grid-area: hand-card-display;
+}
+
+.body-card-display{
+    grid-area: body-card-display;
+}
+
+.hand-card-stats-display{
+    grid-area: hand-card-stats-display;
+}
+.body-card-stats-display{
+    grid-area: body-card-stats-display;
+}
+.card-text{
+    margin-bottom: 30px;
+    line-height: 24px;
+    font-size: 24px;
+}
+
+.card-name-text{
+    font-size: 32px;
+}
+.button-interact{
+    padding: 50px;
+    text-align: center;
+    display: inline-block;
+}
+.buttons-display{
+    padding: 10px;
+    position: relative;
+    align-items: center;
+}
+.button-attack{
+    background-color: green;
+    border: #000;
+    color: white;
+}
+.button-defend{
+    background-color: red;
+    border: black;
+    color: white;
+}
+.interact-inline{
+    display: inline-block;
+}
+.hp-bar{
+    border: green 5px solid;
+    padding: 5px;
+}
+.p1-hp-bar{
+    text-align: center;
+    background-color: green;
+    height: 24px;
+    width: 100%;
+}
+.p2-hp-bar{
+    text-align: center;
+    background-color: green;
+    height: 24px;
+    width: 100%;
+}
+.action-box{
+    position: relative;
+    border: #000 5px solid;
+    width: 50%;
+    height: 200px;
+    text-align: center;
+    margin: auto;
+    overflow-y: scroll;
+}
+.action-messages{
+    text-align: left;
+    margin-left: 50px;
+    margin-right: 50px;
+    font-size: 16px;
+}

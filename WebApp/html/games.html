@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/app.js"></script>
+    <link rel="stylesheet" href="css/gameStyle.css">
+    <link rel="stylesheet" href="css/cardStyle.css">
+    <script defer src="js/gameSelectApp.js"></script>
 </head>
 <body>
     <div class="container" id="page-main">
@@ -29,6 +30,38 @@
         <div id="content-body" class="content=main">
             <div class="page-title" id="page-title">
                 <h1>Games</h1>
+            </div>
+            <div id="game-select" style="text-align: center; align-items: center;">
+                <p style="font-size: 24px;">For initial testing purposes, the only available mode to play right now is vs AI.</p>
+                <p style="font-size: 24px;">After selecting your cards on the Cards screen, please hit Play!</p>
+                <button onclick="" style="background-color: green; padding: 5%; font-size: 24px;">PLAY</button>
+            </div>
+            <div class="deck-cards" id="deck-cards">
+                <h1>Deck Cards</h1>
+                <div class="hand-card">
+                    <h1>Hand cards</h1>
+                    <div id="hand-card-slot1" class="selected-card-sub slot-1 outline-selected-hand">
+
+                    </div>
+                    <div id="hand-card-slot2" class="selected-card-sub slot-2 outline-selected-hand">
+
+                    </div>
+                    <div id="hand-card-slot3" class="selected-card-sub slot-3 outline-selected-hand">
+
+                    </div>
+                </div>
+                <div class="body-card">
+                    <h1>Body cards</h1>
+                    <div id="body-card-slot1" class="selected-card-sub slot-1 outline-selected-body"> 
+
+                    </div>
+                    <div id="body-card-slot2" class="selected-card-sub slot-2 outline-selected-body"> 
+
+                    </div>
+                    <div id="body-card-slot3" class="selected-card-sub slot-3 outline-selected-body"> 
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>

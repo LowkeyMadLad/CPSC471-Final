@@ -64,19 +64,20 @@ public class Player {
         return cards;
     }
 
-    public void updateWL(boolean win){
-        if(win){
-            // db update win
-        } else {
-            // db update loss
-        }
+    public void updateStats(boolean win) throws DBConnectException, SQLException{
+        // SKIP IF BOT ACCOUNT
+        if(username.equals("BOT")) return;
+
+        db.updatePlayerStats(username, win);
     }
 
-    public void updateMMR(int points){
-        // db update mmr
-    }
+    // both of the below functions are now done by updatePlayerStats()
 
-    public void updateSeasonGames(){
-        // db update season games
-    }
+    // public void updateMMR(int points){
+    //     // db update mmr
+    // }
+
+    // private void updateSeasonStats(){
+    //     // db update season games
+    // }
 }

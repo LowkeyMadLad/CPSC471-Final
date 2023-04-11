@@ -27,4 +27,6 @@ public class SampleMain {
 
         // CardGame.replayGame("da97cc56-1eed-4db3-916f-fc1acc30392f");
     }
+
+    // THIS WOULD BE SOME PUBLIC GLOBAL FUNCTION IN THE FRONT END? IDK WHERE THIS WOULD GO
 }

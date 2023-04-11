@@ -151,6 +151,7 @@ INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES
 
 -- test data
 INSERT INTO `Player` (`username`, `password`, `wins`, `losses`, `mmr`, `displayname`) VALUES 
+    ('BOT', 'bot', 0, 0, 0, 'AI'),
     ('dannyp', 'swag', 20, 5, 1000, 'pistachio'),
     ('bob', 'bbb222', 3, 42, 150, 'bobba1'),
     ('a1b2c3', '000', 10, 10, 500, 'testguy')

@@ -58,9 +58,15 @@ public class CardGame {
 
         Player winner;
         if(player1.hp <= 0){
+            // player 2 wins
             winner = player2;
+            player2.updateStats(true);
+            player1.updateStats(false);
         } else{
+            // player 1 wins
             winner = player1;
+            player1.updateStats(true);
+            player2.updateStats(false);
         }
         System.out.println("\nGAME OVER!");
         System.out.println(winner.getDisplayname() + " wins with " + winner.hp + " health remaining!");
@@ -92,7 +98,7 @@ public class CardGame {
             // players can only defend once in a row
             if(player.defLastTurn){
                 System.out.println(player.getDisplayname() + " DEFENDED LAST ROUND.");
-                System.out.println("THEY WILL ATTACK THIS ROUND.");
+                System.out.println("THEY WILL ATTACK THIS ROUND.\n");
                 choice = "A";
                 player.defLastTurn = false;
                 break;

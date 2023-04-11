@@ -227,6 +227,8 @@ public class CardDatabase {
     }
 
     public void updatePlayerStats(String username, boolean didWin) throws DBConnectException, SQLException {
+        initializeConnection();
+
         // Get the current wins, losses, and MMR for the player
         String query = "SELECT * FROM Player WHERE username = ?";
         PreparedStatement stmt = dbConnect.prepareStatement(query);
@@ -243,16 +245,16 @@ public class CardDatabase {
             System.out.println("something broke!!!");
             System.exit(1);
         }
-        rs.close();
-        stmt.close();
 
         // Update the wins/losses/MMR
         if (didWin) {
             wins++;
-            mmr += 1;
+            mmr += 50;
         } else {
             losses++;
-            mmr -= 1;
+            // if mmr is less than 0, set to 0
+            mmr = Math.max(0, mmr - 50);
+            // mmr -= 50;
         }
         query = "UPDATE Player SET wins = ?, losses = ?, mmr = ? WHERE username = ?";
         stmt = dbConnect.prepareStatement(query);
@@ -264,6 +266,8 @@ public class CardDatabase {
         if(rowCount == 0){
             throw new SQLException("No rows were changed.");
         }
+        
+        rs.close();
         stmt.close();
     }
 

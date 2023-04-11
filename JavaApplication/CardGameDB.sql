@@ -169,3 +169,6 @@ INSERT INTO `Admin` (`username`, `password`) VALUES
     ('admin', 'pass'),
     ('prof', 'cpsc')
 ;
+INSERT INTO `Season` (`seasonNo`, `startDate`) VALUES
+    (1, '2023-04-01 00:00:00')
+;

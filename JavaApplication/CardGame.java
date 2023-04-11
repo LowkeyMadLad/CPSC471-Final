@@ -39,7 +39,7 @@ public class CardGame {
         System.out.println("PLAYER 2: " + player2.getDisplayname());
         System.out.println("BODY: " + p2b.getName());
         System.out.println("MELEE: "+p2b.getMeleeStat()+"   RANGE: "+p2b.getRangeStat()+"   GUARD: "+p2b.getGuardStat());
-        System.out.println("HAND: " + p1h.getName());
+        System.out.println("HAND: " + p2h.getName());
         System.out.println("MELEE: "+p2h.getMeleeStat()+"   RANGE: "+p2h.getRangeStat()+"   GUARD: "+p2h.getGuardStat());
         System.out.println();
 

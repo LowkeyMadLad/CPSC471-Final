@@ -269,7 +269,74 @@ public class CardDatabase {
         
         rs.close();
         stmt.close();
+
+        updateSeasonPeak(username, mmr);
     }
+
+    public void updateSeasonPeak(String username, int newMMR) throws DBConnectException, SQLException {
+        initializeConnection();
+    
+        // Get the highest seasonNo
+        String seasonQuery = "SELECT MAX(`seasonNo`) AS `currentSeason` FROM `Season`";
+        Statement seasonStmt = dbConnect.createStatement();
+        ResultSet seasonResult = seasonStmt.executeQuery(seasonQuery);
+        int currentSeason = -1;
+        if (seasonResult.next()) {
+            currentSeason = seasonResult.getInt("currentSeason");
+        } else {
+            System.out.println("No season found.");
+            return;
+        }
+        seasonStmt.close();
+        seasonResult.close();
+    
+        // Check if the user is already in the Season_Peak table for the current season
+        String query = "SELECT * FROM `Season_Peak` WHERE `player` = ? AND `season` = ?";
+        PreparedStatement stmt = dbConnect.prepareStatement(query);
+        stmt.setString(1, username);
+        stmt.setInt(2, currentSeason);
+        ResultSet rs = stmt.executeQuery();
+    
+        if (rs.next()) {
+            // User is already in the table for the current season
+            int oldMMR = rs.getInt("peakMMR");
+            int gamesPlayed = rs.getInt("gamesPlayed");
+    
+            if (newMMR > oldMMR) {
+                // Update the MMR and increment gamesPlayed
+                query = "UPDATE `Season_Peak` SET `peakMMR` = ?, `gamesplayed` = ? WHERE `player` = ? AND `season` = ?";
+                stmt = dbConnect.prepareStatement(query);
+                stmt.setInt(1, newMMR);
+                stmt.setInt(2, gamesPlayed + 1);
+                stmt.setString(3, username);
+                stmt.setInt(4, currentSeason);
+            } else {
+                // Increment gamesPlayed only
+                query = "UPDATE `Season_Peak` SET `gamesplayed` = ? WHERE `player` = ? AND `season` = ?";
+                stmt = dbConnect.prepareStatement(query);
+                stmt.setInt(1, gamesPlayed + 1);
+                stmt.setString(2, username);
+                stmt.setInt(3, currentSeason);
+            }
+        } else {
+            // User is not in the table for the current season, create a new row
+            query = "INSERT INTO `Season_Peak` (`player`, `season`, `peakMMR`, `gamesplayed`) VALUES (?, ?, ?, ?)";
+            stmt = dbConnect.prepareStatement(query);
+            stmt.setString(1, username);
+            stmt.setInt(2, currentSeason);
+            stmt.setInt(3, newMMR);
+            stmt.setInt(4, 1);
+        }
+    
+        int rowCount = stmt.executeUpdate();
+        if (rowCount == 0) {
+            throw new SQLException("No rows were changed.");
+        }
+    
+        rs.close();
+        stmt.close();
+        dbConnect.close();
+    }    
 
     public void createAdmin(String username, String password) throws DBConnectException, SQLException {
         // Check if the username already exists
@@ -343,70 +410,5 @@ public class CardDatabase {
             throw new DBConnectException("Failed to connect to the Database. Check DBURL, USERNAME, PASSWORD.");
         }
     }
-}
-
-public void updateSeasonPeak(String username, int newMMR) throws DBConnectException, SQLException {
-    initializeConnection();
-
-    // Get the highest seasonID
-    String seasonQuery = "SELECT MAX(`seasonID`) AS `currentSeason` FROM `Season`";
-    Statement seasonStmt = dbConnect.createStatement();
-    ResultSet seasonResult = seasonStmt.executeQuery(seasonQuery);
-    int currentSeason = -1;
-    if (seasonResult.next()) {
-        currentSeason = seasonResult.getInt("currentSeason");
-    } else {
-        System.out.println("No season found.");
-        return;
-    }
-    seasonStmt.close();
-    seasonResult.close();
-
-    // Check if the user is already in the SeasonPeak table for the current season
-    String query = "SELECT * FROM `SeasonPeak` WHERE `player` = ? AND `seasonID` = ?";
-    PreparedStatement stmt = dbConnect.prepareStatement(query);
-    stmt.setString(1, username);
-    stmt.setInt(2, currentSeason);
-    ResultSet rs = stmt.executeQuery();
-
-    if (rs.next()) {
-        // User is already in the table for the current season
-        int oldMMR = rs.getInt("mmr");
-        int gamesPlayed = rs.getInt("gamesPlayed");
-
-        if (newMMR > oldMMR) {
-            // Update the MMR and increment gamesPlayed
-            query = "UPDATE `SeasonPeak` SET `mmr` = ?, `gamesPlayed` = ? WHERE `player` = ? AND `seasonID` = ?";
-            stmt = dbConnect.prepareStatement(query);
-            stmt.setInt(1, newMMR);
-            stmt.setInt(2, gamesPlayed + 1);
-            stmt.setString(3, username);
-            stmt.setInt(4, currentSeason);
-        } else {
-            // Increment gamesPlayed only
-            query = "UPDATE `SeasonPeak` SET `gamesPlayed` = ? WHERE `player` = ? AND `seasonID` = ?";
-            stmt = dbConnect.prepareStatement(query);
-            stmt.setInt(1, gamesPlayed + 1);
-            stmt.setString(2, username);
-            stmt.setInt(3, currentSeason);
-        }
-    } else {
-        // User is not in the table for the current season, create a new row
-        query = "INSERT INTO `SeasonPeak` (`player`, `seasonID`, `mmr`, `gamesPlayed`) VALUES (?, ?, ?, ?)";
-        stmt = dbConnect.prepareStatement(query);
-        stmt.setString(1, username);
-        stmt.setInt(2, currentSeason);
-        stmt.setInt(3, newMMR);
-        stmt.setInt(4, 1);
-    }
-
-    int rowCount = stmt.executeUpdate();
-    if (rowCount == 0) {
-        throw new SQLException("No rows were changed.");
-    }
-
-    rs.close();
-    stmt.close();
-    dbConnect.close();
 }
 

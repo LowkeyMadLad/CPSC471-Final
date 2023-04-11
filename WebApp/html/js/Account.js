@@ -4,8 +4,7 @@ const loginBtn = document.getElementById("login-btn");
 const logoutBtn = document.getElementById("logout-btn");
 
 loginBtn.addEventListener("click", () => {
-  // Replace this with your actual logic to verify the user's credentials
-  // and fetch the user data from the server
+//will add functionality once we know how were going to do it 
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 

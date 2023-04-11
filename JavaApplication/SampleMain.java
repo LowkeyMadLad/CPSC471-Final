@@ -34,7 +34,7 @@ public class SampleMain {
         // assuming you can do that, i will just put it as a while loop for now.
         boolean p1turn = true;
         // vvv UNCOMMENT TO TEST RAGE QUIT vvv
-        int turn = 1;
+        // int turn = 1;
         // ^^^ UNCOMMENT TO TEST RAGE QUIT ^^^
         while(true){
             // button is pressed by player
@@ -71,6 +71,7 @@ public class SampleMain {
                 Player winner = game.getWinner();
                 System.out.println(winner.getDisplayname() + " wins with " + winner.hp + " health remaining!");
                 // i can break out of this treacherous hell of a while loop
+                // (end the game)
                 break;
             }
 

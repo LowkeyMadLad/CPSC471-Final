@@ -11,6 +11,14 @@ USE CARD_DATABASE;
 --     PRIMARY KEY (username)
 -- );
 
+DROP TABLE IF EXISTS `Season`;
+CREATE TABLE Season (
+    seasonNo INT,
+    startDate DATETIME,
+
+    PRIMARY KEY(seasonNo)
+);
+
 DROP TABLE IF EXISTS `Player`;
 CREATE TABLE Player (
     username VARCHAR(255),
@@ -84,17 +92,6 @@ CREATE TABLE Game (
 
 -- weak entities
 
-DROP TABLE IF EXISTS `Season_Peak`;
-CREATE TABLE Season_Peak (
-    season INT NOT NULL,
-    player VARCHAR(255),
-
-    gamesplayed INT,
-    peakMMR INT,
-
-    FOREIGN KEY (player) REFERENCES Player(username)
-);
-
 DROP TABLE IF EXISTS `Move`;
 CREATE TABLE Move (
     seed VARCHAR(255),
@@ -104,6 +101,18 @@ CREATE TABLE Move (
 );
 
 -- relation tables
+
+DROP TABLE IF EXISTS `Season_Peak`;
+CREATE TABLE Season_Peak (
+    season INT NOT NULL,
+    player VARCHAR(255),
+
+    gamesplayed INT,
+    peakMMR INT,
+
+    FOREIGN KEY (player) REFERENCES Player(username),
+    FOREIGN KEY (season) REFERENCES Season(seasonNo)
+);
 
 DROP TABLE IF EXISTS `Deck`;
 CREATE TABLE Deck (

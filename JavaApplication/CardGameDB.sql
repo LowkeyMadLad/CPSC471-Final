@@ -182,3 +182,11 @@ INSERT INTO `Unique_Card` (`cardID`, `verifiedBy`, `owner`) VALUES
     (1101, 'admin', 'dannyp'),
     (1001, 'prof', 'bob')
 ;
+INSERT INTO `Deck` (`player`, `cardID`) VALUES
+	('dannyp', 101),
+    ('dannyp', 102),
+    ('dannyp', 103),
+    ('dannyp', 001),
+    ('dannyp', 002),
+    ('dannyp', 003)
+;

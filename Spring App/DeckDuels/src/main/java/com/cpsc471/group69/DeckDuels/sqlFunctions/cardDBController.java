@@ -3,20 +3,23 @@ package com.cpsc471.group69.DeckDuels.sqlFunctions;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.springframework.stereotype.Controller;
+// import org.springframework.stereotype.Controller;
 // import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.cpsc471.group69.DeckDuels.game.Card;
 import com.cpsc471.group69.DeckDuels.game.CardDatabase;
 import com.cpsc471.group69.DeckDuels.game.DBConnectException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class cardDBController {
+    CardDatabase db = CardDatabase.getDB();
 
     @GetMapping("/cards/getallcards/{username}")
+    @CrossOrigin(origins = "*")
     public ArrayList<Long> getCards(@PathVariable(value = "username") String username){
-        CardDatabase db = CardDatabase.getDB();
-
         ArrayList<Long> cards = new ArrayList<Long>();
         ArrayList<Long> uniques = new ArrayList<Long>();
 
@@ -39,5 +42,27 @@ public class cardDBController {
         }
 
         return cards;
+    }
+
+    @GetMapping("/cards/getcard/{cardID}")
+    @CrossOrigin(origins = "*")
+    public String getCard(@PathVariable(value = "cardID") String cardID){
+        int id = Integer.parseInt(cardID);
+        Card card = null;
+        try {
+            card = new Card(id);
+        } catch (DBConnectException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        String jsonString = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            jsonString = mapper.writeValueAsString(card);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return jsonString;
     }
 }

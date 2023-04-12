@@ -1,5 +1,6 @@
 package com.cpsc471.group69.DeckDuels.sqlFunctions;
 
+import com.cpsc471.group69.DeckDuels.game.Card;
 import com.cpsc471.group69.DeckDuels.game.CardDatabase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +26,19 @@ public class gameSelectDBController {
         if (cardIDs.isEmpty()){
             throw new IllegalArgumentException("cardID's returned null or none");
         }
-        List<String> strList= new ArrayList<String>();
-        for(int i = 0; i< cardIDs.size(); i++){
-            strList.add(cardIDs.get(i).toString());
+        List<Card> cardArr = new ArrayList<Card>();
+        for (int i = 0; i < cardIDs.size(); i++){
+            try {
+                Card temp = new Card(cardIDs.get(i).intValue());
+                cardArr.add(temp);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
         ObjectMapper mapper = new ObjectMapper();
         try{
-            jsonStr = mapper.writeValueAsString(strList);
+            jsonStr = mapper.writeValueAsString(cardArr);
         } catch (Exception e){
             e.printStackTrace();
         }

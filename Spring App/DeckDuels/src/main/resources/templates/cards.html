@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="css/cardStyle.css">
     <link rel="stylesheet" th:href="@{css/default.css}">
     <script defer th:src="@{js/cardsApp.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <div class="container" id="page-main">
@@ -68,13 +70,13 @@
                     <button class="save-button">SAVE</button>
                     <div class="body-card">
                         <h1>Body cards</h1>
-                        <div id="body-card-slot" class="selected-card-sub slot-1 outline-unselected-body"> 
+                        <div id="body-card-slot" class="selected-card-sub slot-1 outline-unselected-body">
 
                         </div>
-                        <div id="body-card-slot" class="selected-card-sub slot-2 outline-unselected-body"> 
+                        <div id="body-card-slot" class="selected-card-sub slot-2 outline-unselected-body">
 
                         </div>
-                        <div id="body-card-slot" class="selected-card-sub slot-3 outline-unselected-body"> 
+                        <div id="body-card-slot" class="selected-card-sub slot-3 outline-unselected-body">
 
                         </div>
                     </div>
@@ -88,7 +90,7 @@
             </div>
         </div>
     </div>
-
+    <script th:src="@{js/onStartCards.js}"></script>
 
 </body>
 </html>

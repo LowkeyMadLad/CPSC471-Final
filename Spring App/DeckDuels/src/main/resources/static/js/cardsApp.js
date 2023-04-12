@@ -9,6 +9,7 @@ console.log("loaded");
 const draggables = document.querySelectorAll('.draggable')
 const selectedCardSub = document.querySelectorAll('.selected-card-sub')
 
+
 // This detects if a card is being dragged and when the dragging has stopped
 draggables.forEach(draggable => {
     draggable.addEventListener('dragstart', () => {

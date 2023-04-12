@@ -133,3 +133,10 @@ nav{
 .draggable.dragging{
     opacity: .5;
 }
+.save-button{
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-right: 50px;
+    background-color: green;
+    text-align: center;
+}

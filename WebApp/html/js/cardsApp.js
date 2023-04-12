@@ -4,6 +4,21 @@ This page was created by Ryan Mailhiot for CPSC 471 final project.
 This is the JS page for dealing with all card components that have to deal with drag and drop, including their logic.
 It is loaded in and run as soon as the page loads up. This page will end up being for the cards page only.
 */
+
+const mysql = require("mysql");
+
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "cardUser",
+    password: "1234",
+    database: "CARD_DATABASE"
+});
+
+con.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
+
 console.log("loaded");
 const draggables = document.querySelectorAll('.draggable')
 const selectedCardSub = document.querySelectorAll('.selected-card-sub')
@@ -53,6 +68,7 @@ selectedCardSub.forEach(selectCard => {
                 }
                 // Adds the card to the right location and applyies the correct outline styling
                 selectCard.appendChild(draggable)
+                draggable.classList.add("selected-card")
                 selectCard.classList.remove("outline-unselected-body")
                 selectCard.classList.add("outline-selected-body")
             } 
@@ -69,6 +85,7 @@ selectedCardSub.forEach(selectCard => {
                     draggable.classList.add("slot-3")
                 }
                 selectCard.appendChild(draggable)
+                draggable.classList.add("selected-card")
                 selectCard.classList.remove("outline-unselected-hand")
                 selectCard.classList.add("outline-selected-hand")
             }
@@ -94,9 +111,11 @@ selectedCardSub.forEach(selectCard => {
                     var sendToSlot = replaceable.id + "-holder";
                     const replacableSlot = document.getElementById(sendToSlot)
                     replaceable.classList.remove('body-card-slot')
+                    replaceable.classList.remove('selected-card')
                     replacableSlot.appendChild(replaceable)
                     selectCard.appendChild(draggable)
                     draggable.classList.add('body-card-slot')
+                    draggable.classList.add("selected-card")
                 }
             } 
             // This else is the same as above just for the hand slot
@@ -119,9 +138,11 @@ selectedCardSub.forEach(selectCard => {
                     var sendToSlot = replaceable.id + "-holder";
                     const replacableSlot = document.getElementById(sendToSlot)
                     replaceable.classList.remove('hand-card-slot')
+                    replaceable.classList.remove('selected-card')
                     replacableSlot.appendChild(replaceable)
                     selectCard.appendChild(draggable)
                     draggable.classList.add('hand-card-slot')
+                    draggable.classList.add("selected-card")
                 }
 
             }
@@ -145,5 +166,11 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll('.hidden');
 hiddenElements.forEach((el) => observer.observe(el));
 
+function onClickSave(){
+    const selectedCards = document.querySelectorAll('.selected-card')
+    
+}
 
 
+
+ 

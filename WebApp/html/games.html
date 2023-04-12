@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/gameStyle.css">
     <link rel="stylesheet" href="css/cardStyle.css">
+    <link rel="stylesheet" href="css/default.css">
     <script defer src="js/gameSelectApp.js"></script>
 </head>
 <body>
@@ -34,7 +35,9 @@
             <div id="game-select" style="text-align: center; align-items: center;">
                 <p style="font-size: 24px;">For initial testing purposes, the only available mode to play right now is vs AI.</p>
                 <p style="font-size: 24px;">After selecting your cards on the Cards screen, please hit Play!</p>
-                <button onclick="" style="background-color: green; padding: 5%; font-size: 24px;">PLAY</button>
+                <form action="gameRun.html">
+                    <input type="submit" value="PLAY" style="background-color: green; padding: 3%;">
+                </form>
             </div>
             <div class="deck-cards" id="deck-cards">
                 <h1>Deck Cards</h1>
@@ -62,10 +65,14 @@
 
                     </div>
                 </div>
+                
+            </div>
+            <div class="ads-slot">
+                <h1>Your ad here</h1>
             </div>
         </div>
     </div>
-
+    
 
 </body>
 </html>

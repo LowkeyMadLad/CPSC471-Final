@@ -5,20 +5,6 @@ This is the JS page for dealing with all card components that have to deal with 
 It is loaded in and run as soon as the page loads up. This page will end up being for the cards page only.
 */
 
-const mysql = require("mysql");
-
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "cardUser",
-    password: "1234",
-    database: "CARD_DATABASE"
-});
-
-con.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-  });
-
 console.log("loaded");
 const draggables = document.querySelectorAll('.draggable')
 const selectedCardSub = document.querySelectorAll('.selected-card-sub')

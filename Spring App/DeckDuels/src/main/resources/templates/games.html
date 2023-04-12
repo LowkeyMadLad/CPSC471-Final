@@ -36,39 +36,39 @@
             <div id="game-select" style="text-align: center; align-items: center;">
                 <p style="font-size: 24px;">For initial testing purposes, the only available mode to play right now is vs AI.</p>
                 <p style="font-size: 24px;">After selecting your cards on the Cards screen, please hit Play!</p>
-                <div class="selected-card-sub slot1" id="hand-card-selected"> 
+                <div class="selected-card-sub outline-unselected-hand" id="hand-card-selected">
                     
                 </div>
-                <div class="selected-card-sub slot2" id="body-card-selected"> 
+                <div class="selected-card-sub outline-unselected-body" id="body-card-selected">
                     
                 </div>
-                <form action="gameRun.html">
-                    <input type="submit" value="PLAY" style="background-color: green; padding: 3%;">
+                <form action="">
+                    <input id="play-button-submit" type="submit" value="PLAY" style="background-color: red; padding: 3%;">
                 </form>
             </div>
             <div class="deck-cards" id="deck-cards">
                 <h1>Deck Cards</h1>
                 <div class="hand-card">
                     <h1>Hand cards</h1>
-                    <div id="hand-card-slot1" class="selected-card-sub slot-1 outline-selected-hand">
+                    <div id="slot1-hand-holder" class="selected-card-sub-style slot-1 outline-selected-hand">
 
                     </div>
-                    <div id="hand-card-slot2" class="selected-card-sub slot-2 outline-selected-hand">
+                    <div id="slot2-hand-holder" class="selected-card-sub-style slot-2 outline-selected-hand">
 
                     </div>
-                    <div id="hand-card-slot3" class="selected-card-sub slot-3 outline-selected-hand">
+                    <div id="slot3-hand-holder" class="selected-card-sub-style slot-3 outline-selected-hand">
 
                     </div>
                 </div>
                 <div class="body-card">
                     <h1>Body cards</h1>
-                    <div id="body-card-slot1" class="selected-card-sub slot-1 outline-selected-body"> 
+                    <div id="slot1-body-holder" class="selected-card-sub-style slot-1 outline-selected-body">
 
                     </div>
-                    <div id="body-card-slot2" class="selected-card-sub slot-2 outline-selected-body"> 
+                    <div id="slot2-body-holder" class="selected-card-sub-style slot-2 outline-selected-body">
 
                     </div>
-                    <div id="body-card-slot3" class="selected-card-sub slot-3 outline-selected-body"> 
+                    <div id="slot3-body-holder" class="selected-card-sub-style slot-3 outline-selected-body">
 
                     </div>
                 </div>

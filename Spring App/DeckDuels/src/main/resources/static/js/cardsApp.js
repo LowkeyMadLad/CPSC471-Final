@@ -41,7 +41,7 @@ selectedCardSub.forEach(selectCard => {
          */
         if(selectCard.childNodes.length == 1){
             // This if and else if are for making sure the card goes into the only slot it is allowed too
-            if (selectCard.id === "body-card-slot" && draggable.classList.contains("body-only")) {
+            if (selectCard.classList.contains("body-card-slot-holder") && draggable.classList.contains("body-only")) {
                 draggable.classList.add('body-card-slot') // This is for logic and potential styling
                 // Gives it a slot location based on which one it was placed in. 
                 if (selectCard.classList.contains("slot-1")) {
@@ -60,7 +60,7 @@ selectedCardSub.forEach(selectCard => {
                 selectCard.classList.add("outline-selected-body")
             } 
             // This is identical as above but for hand instead of body.
-            else if(selectCard.id === "hand-card-slot" && draggable.classList.contains("hand-only")){
+            else if(selectCard.classList.contains("hand-card-slot-holder") && draggable.classList.contains("hand-only")){
                 draggable.classList.add('hand-card-slot')
                 if (selectCard.classList.contains("slot-1")) {
                     draggable.classList.add("slot-1")
@@ -78,7 +78,7 @@ selectedCardSub.forEach(selectCard => {
             }
         }
         else{ // this is when a card slot is already populated. It will remove the already existing one and add the new one
-            if (selectCard.id === "body-card-slot") { // Body Card
+            if (selectCard.classList.contains("body-card-slot-holder")) { // Body Card
                 if (draggable.classList.contains("body-only")) { // Only does something if it is in the right slot
                     const replaceable = document.querySelector('.body-card-slot') // Gets the item currently in the body slot
                     // Deals with the slot adding and removing

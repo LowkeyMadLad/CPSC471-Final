@@ -114,6 +114,12 @@ nav{
     height: 225px;
     display: inline-block;
 }
+.selected-card-sub-style{
+    margin: auto;
+    width: 150px;
+    height: 225px;
+    display: inline-block;
+}
 
 .outline-unselected-hand{
     outline: #102000 4px solid;

@@ -155,7 +155,11 @@ INSERT INTO `Card` (`cardID`, `name`, `type`, `melee`, `range`, `guard`) VALUES
     (105, 'Kunai', 1, 30, 70, 0),       -- done //
     (106, 'Ballista', 1, 0, 60, 40),    -- done //
     (107, 'Halberd', 1, 40, 40, 20),    -- done //
-    (108, 'Bomb', 1, 60, 30, 10)        -- done //
+    (108, 'Bomb', 1, 60, 30, 10),       -- done //
+
+    -- unique cards
+    (1101, 'Cinder', 1, 80, 0, 20), 
+    (1001, 'Phoenix', 0, 10, 30, 60)
 ;
 
 -- test data
@@ -171,4 +175,10 @@ INSERT INTO `Admin` (`username`, `password`) VALUES
 ;
 INSERT INTO `Season` (`seasonNo`, `startDate`) VALUES
     (1, '2023-04-01 00:00:00')
+;
+
+-- UNIQUE TEST CARDS
+INSERT INTO `Unique_Card` (`cardID`, `verifiedBy`, `owner`) VALUES
+    (1101, 'admin', 'dannyp'),
+    (1001, 'prof', 'bob')
 ;

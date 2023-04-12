@@ -452,6 +452,49 @@ public class CardDatabase {
         return list;
     }
 
+    // all non unique cards
+    public ArrayList<Long> getAllMainCards() throws DBConnectException, SQLException{
+        ArrayList<Long> list = new ArrayList<Long>();
+
+        initializeConnection();
+        String query = "SELECT cardID FROM Card WHERE cardID NOT IN (SELECT cardID FROM Unique_Card)";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        ResultSet results = myStmt.executeQuery();
+
+        while(results.next()){
+            Long cid = results.getLong("cardID");
+            list.add(cid);
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return list;
+    }
+
+    // all unique cards belonging to a player
+    public ArrayList<Long> getUniqueCards(String username) throws DBConnectException, SQLException{
+        ArrayList<Long> list = new ArrayList<Long>();
+
+        initializeConnection();
+        String query = "SELECT cardID FROM Card WHERE cardID IN (SELECT cardID FROM Unique_Card WHERE `owner` = ?)";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, username);
+        ResultSet results = myStmt.executeQuery();
+
+        while(results.next()){
+            Long cid = results.getLong("cardID");
+            list.add(cid);
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return list;
+    }
+
     /**
      * Initializes connection to the database
      * @throws DBConnectException

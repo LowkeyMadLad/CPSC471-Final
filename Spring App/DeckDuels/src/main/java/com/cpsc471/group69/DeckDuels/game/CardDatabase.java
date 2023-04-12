@@ -495,6 +495,93 @@ public class CardDatabase {
         return list;
     }
 
+    public int getPlayerMMR(String username) throws DBConnectException, SQLException {
+        initializeConnection();
+        String query = "SELECT `mmr` FROM Player WHERE `username` = ?;";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, username);
+        ResultSet results = myStmt.executeQuery();
+
+        int mmr = -1;
+        if(results.next()){
+            mmr = results.getInt("mmr");
+        } else {
+            System.out.println("something broke!!!");
+            System.exit(1);
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return mmr;
+    }
+
+    public int getPlayerWins(String username) throws DBConnectException, SQLException {
+        initializeConnection();
+        String query = "SELECT `wins` FROM Player WHERE `username` = ?;";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, username);
+        ResultSet results = myStmt.executeQuery();
+
+        int wins = -1;
+        if(results.next()){
+            wins = results.getInt("wins");
+        } else {
+            System.out.println("something broke!!!");
+            System.exit(1);
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return wins;
+    }
+
+    public int getPlayerLosses(String username) throws DBConnectException, SQLException {
+        initializeConnection();
+        String query = "SELECT `losses` FROM Player WHERE `username` = ?;";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, username);
+        ResultSet results = myStmt.executeQuery();
+
+        int losses = -1;
+        if(results.next()){
+            losses = results.getInt("losses");
+        } else {
+            System.out.println("something broke!!!");
+            System.exit(1);
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return losses;
+    }
+
+    public ArrayList<String> getPlayerGames(String username) throws DBConnectException, SQLException {
+        ArrayList<String> list = new ArrayList<String>();
+
+        initializeConnection();
+        String query = "SELECT `gameID` FROM Game WHERE player1 = ? OR player2 = ?";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, username);
+        myStmt.setString(2, username);
+        ResultSet results = myStmt.executeQuery();
+
+        while(results.next()){
+            list.add(results.getString("gameID"));
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return list;
+    }
+
     /**
      * Initializes connection to the database
      * @throws DBConnectException

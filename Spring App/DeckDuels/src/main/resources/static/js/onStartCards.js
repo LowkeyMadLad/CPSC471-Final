@@ -1,15 +1,20 @@
 
-
-
 const username = "dannyp";
+var url = "https://localhost:443/cards/getallcards/" +username;
+fetch(url).then(function(response){
+    return response.json();
+}).then(function (obj) {
+    console.log(obj);
+}).catch(function (err){
+    console.error("something went wrong");
+    console.error(err);
+})
 
-function onStart(){
-    $.ajax({
-        url: "https://localhost:8080/cards/getallcards/" + username,
-        dataType: "json",
-        type: "get",
-        success: function(data){
-            console.log(data);
-        }
-    })
+
+function cardHtmlFormat(cardID){
+    var htmlCard = `
+    <div class="card-holder hidden" id="${cardID}-holder">
+        <img src="img/${cardID}.jpg" id="${cardID}" class="card draggable body-only" draggable="true">
+    </div>
+    `
 }

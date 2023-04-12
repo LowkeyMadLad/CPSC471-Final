@@ -393,6 +393,20 @@ public class CardDatabase {
         myStmt.close();
     }
 
+    public void clearDeck(String playerUsername) throws DBConnectException, SQLException {
+        initializeConnection();
+        String query = "DELETE FROM Deck WHERE player = ?";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, playerUsername);
+
+        int rowCount = myStmt.executeUpdate();
+        if(rowCount == 0){
+            throw new SQLException("No rows were changed.");
+        }
+        
+        myStmt.close();
+    }
+
     public ArrayList<Long> getDeck(String playerUsername) throws DBConnectException, SQLException {
         ArrayList<Long> list = new ArrayList<Long>();
 

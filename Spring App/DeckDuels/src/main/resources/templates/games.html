@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{css/gameStyle.css}">
     <link rel="stylesheet" th:href="@{css/cardStyle.css}">
     <link rel="stylesheet" th:href="@{css/default.css}">
-    <script defer src="js/gameSelectApp.js"></script>
+    <script defer th:src="@{js/gameSelectApp.js}"></script>
 </head>
 <body>
     <div class="container" id="page-main">
@@ -19,11 +19,11 @@
                 </div>
                 <div class="nav-links">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="games.html">Games</a></li>
-                        <li><a href="cards.html">Cards</a></li>
-                        <li><a href="season.html">Season</a></li>
-                        <li><a href="account.html">Account</a></li>
+                        <li><a href="#" th:href="@{/home}">Home</a></li>
+                        <li><a href="#" th:href="@{/games}">Games</a></li>
+                        <li><a href="#" th:href="@{/cards}">Cards</a></li>
+                        <li><a href="#" th:href="@{/season}">Season</a></li>
+                        <li><a href="#" th:href="@{/account}">Account</a></li>
                     </ul>
                 </div>
             </nav>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{css/default.css}">
-    <script defer src="js/app.js"></script>
+    <script defer th:src="@{js/account.js}"></script>
 </head>
 <body>
     <div class="container" id="page-main">
@@ -17,11 +17,11 @@
                 </div>
                 <div class="nav-links">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="games.html">Games</a></li>
-                        <li><a href="cards.html">Cards</a></li>
-                        <li><a href="season.html">Season</a></li>
-                        <li><a href="account.html">Account</a></li>
+                        <li><a href="#" th:href="@{/home}">Home</a></li>
+                        <li><a href="#" th:href="@{/games}">Games</a></li>
+                        <li><a href="#" th:href="@{/cards}">Cards</a></li>
+                        <li><a href="#" th:href="@{/season}">Season</a></li>
+                        <li><a href="#" th:href="@{/account}">Account</a></li>
                     </ul>
                 </div>
             </nav>

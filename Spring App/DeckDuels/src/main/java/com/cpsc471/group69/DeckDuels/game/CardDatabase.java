@@ -274,6 +274,7 @@ public class CardDatabase {
         updateSeasonPeak(username, mmr);
     }
 
+    @SuppressWarnings("resource")
     public void updateSeasonPeak(String username, int newMMR) throws DBConnectException, SQLException {
         initializeConnection();
 
@@ -419,6 +420,29 @@ public class CardDatabase {
 
         while(results.next()){
             list.add(results.getLong("cardID"));
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return list;
+    }
+
+    public ArrayList<SeasonPeak> getSeasonPeaks(String username) throws DBConnectException, SQLException {
+        ArrayList<SeasonPeak> list = new ArrayList<SeasonPeak>();
+
+        initializeConnection();
+        String query = "SELECT * FROM Season_Peak WHERE player = ?";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, username);
+        ResultSet results = myStmt.executeQuery();
+
+        while(results.next()){
+            int s = results.getInt("season");
+            int g = results.getInt("gamesplayed");
+            int m = results.getInt("peakMMR");
+            list.add(new SeasonPeak(s, g, m));
         }
 
         myStmt.close();

@@ -393,6 +393,26 @@ public class CardDatabase {
         myStmt.close();
     }
 
+    public ArrayList<Long> getDeck(String playerUsername) throws DBConnectException, SQLException {
+        ArrayList<Long> list = new ArrayList<Long>();
+
+        initializeConnection();
+        String query = "SELECT cardID FROM Deck WHERE player = ?";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, playerUsername);
+        ResultSet results = myStmt.executeQuery();
+        
+        while(results.next()){
+            list.add(results.getLong("cardID"));
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return list;
+    }
+
     /**
      * Initializes connection to the database
      * @throws DBConnectException

@@ -5,6 +5,9 @@ fetch(url).then(function(response){
     return response.json();
 }).then(function (obj) {
     console.log(obj);
+    for(i= 0; i < obj.length; i++){
+        console.log("This is working maybe?")
+    }
 }).catch(function (err){
     console.error("something went wrong");
     console.error(err);

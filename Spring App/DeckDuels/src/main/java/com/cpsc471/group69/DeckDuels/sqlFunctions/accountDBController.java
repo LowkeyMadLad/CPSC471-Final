@@ -42,7 +42,7 @@ public class accountDBController {
         return mmr;
     }
 
-    @GetMapping("/account/getmmr/{username}")
+    @GetMapping("/account/getwins/{username}")
     @CrossOrigin(origins = "*")
     public int getWins(@PathVariable(value = "username") String username){
         int wins = -1;
@@ -54,7 +54,7 @@ public class accountDBController {
         return wins;
     }
 
-    @GetMapping("/account/getmmr/{username}")
+    @GetMapping("/account/getlosses/{username}")
     @CrossOrigin(origins = "*")
     public int getLosses(@PathVariable(value = "username") String username){
         int losses = -1;
@@ -86,7 +86,7 @@ public class accountDBController {
         return history;
     }
 
-    @GetMapping("/account/games/{gameID}")
+    @GetMapping("/account/gamesbyid/{gameID}")
     @CrossOrigin(origins = "*")
     public String replayGameDetails(@PathVariable(value = "gameID") String uuid){
         String game = "ERROR. GAME NOT FOUND.";

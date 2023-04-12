@@ -37,11 +37,6 @@ selectedCardSub.forEach(selectCard => {
             // This if and else if are for making sure the card goes into the only slot it is allowed too
             if (selectCard.id === "body-card-slot" && draggable.classList.contains("body-only")) {
                 draggable.classList.add('body-card-slot') // This is for logic and potential styling
-                // Gives it a slot location based on which one it was placed in. 
-                if (selectCard.classList.contains("slot-1")) {
-                    draggable.classList.add("slot-1")
-                }
-                // Adds the card to the right location and applyies the correct outline styling
                 selectCard.appendChild(draggable)
                 draggable.classList.add("selected-card")
                 selectCard.classList.remove("outline-unselected-body")
@@ -50,15 +45,6 @@ selectedCardSub.forEach(selectCard => {
             // This is identical as above but for hand instead of body.
             else if(selectCard.id === "hand-card-slot" && draggable.classList.contains("hand-only")){
                 draggable.classList.add('hand-card-slot')
-                if (selectCard.classList.contains("slot-1")) {
-                    draggable.classList.add("slot-1")
-                }
-                if (selectCard.classList.contains("slot-2")) {
-                    draggable.classList.add("slot-2")
-                }
-                if (selectCard.classList.contains("slot-3")) {
-                    draggable.classList.add("slot-3")
-                }
                 selectCard.appendChild(draggable)
                 draggable.classList.add("selected-card")
                 selectCard.classList.remove("outline-unselected-hand")
@@ -70,20 +56,16 @@ selectedCardSub.forEach(selectCard => {
                 if (draggable.classList.contains("body-only")) { // Only does something if it is in the right slot
                     const replaceable = document.querySelector('.body-card-slot') // Gets the item currently in the body slot
                     // Deals with the slot adding and removing
-                    if (selectCard.classList.contains("slot-1")) {
-                        draggable.classList.add("slot-1")
-                        replaceable.classList.remove('slot-1')
-                    }
-                    if (selectCard.classList.contains("slot-2")) {
-                        draggable.classList.add("slot-2")
-                        replaceable.classList.remove('slot-2')
-                    }
-                    if (selectCard.classList.contains("slot-3")) {
-                        draggable.classList.add("slot-3")
-                        replaceable.classList.remove('slot-3')
-                    }
                     // Finds the location to put the card being replaced, and then places it in that slot. Then appends the new card
-                    var sendToSlot = replaceable.id + "-holder";
+                    if (replaceable.classList.contains("slot-1")) {
+                        var sendToSlot = "slot1-body-holder";
+                    }
+                    if (replaceable.classList.contains("slot-2")) {
+                        var sendToSlot = "slot2-body-holder";
+                    }
+                    if (replaceable.classList.contains("slot-3")) {
+                        var sendToSlot = "slot3-body-holder";
+                    }
                     const replacableSlot = document.getElementById(sendToSlot)
                     replaceable.classList.remove('body-card-slot')
                     replaceable.classList.remove('selected-card')
@@ -98,19 +80,15 @@ selectedCardSub.forEach(selectCard => {
                 if (draggable.classList.contains("hand-only")) {
                     const replaceable = document.querySelector('.hand-card-slot') // Gets the item currently in the body slot
                     console.log(replaceable)
-                    if (selectCard.classList.contains("slot-1")) {
-                        draggable.classList.add("slot-1")
-                        replaceable.classList.remove('slot-1')
+                    if (replaceable.classList.contains("slot-1")) {
+                        var sendToSlot = "slot1-hand-holder";
                     }
-                    if (selectCard.classList.contains("slot-2")) {
-                        draggable.classList.add("slot-2")
-                        replaceable.classList.remove('slot-2')
+                    if (replaceable.classList.contains("slot-2")) {
+                        var sendToSlot = "slot2-hand-holder";
                     }
-                    if (selectCard.classList.contains("slot-3")) {
-                        draggable.classList.add("slot-3")
-                        replaceable.classList.remove('slot-3')
+                    if (replaceable.classList.contains("slot-3")) {
+                        var sendToSlot = "slot3-hand-holder";
                     }
-                    var sendToSlot = replaceable.id + "-holder";
                     const replacableSlot = document.getElementById(sendToSlot)
                     replaceable.classList.remove('hand-card-slot')
                     replaceable.classList.remove('selected-card')

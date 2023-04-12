@@ -1,5 +1,4 @@
 package com.cpsc471.group69.DeckDuels.game;
-
 import java.sql.*;
 // import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class CardDatabase {
         myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
 
-        int[] stats = new int[3];    
+        int[] stats = new int[3];
         if(results.next()){
             // System.out.println("testing if this runs");
             stats[0] = results.getInt("melee");
@@ -57,7 +56,7 @@ public class CardDatabase {
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
-   
+
         String result = "impossible value to have";
         if(results.next()){
             result = results.getString("name");
@@ -65,7 +64,7 @@ public class CardDatabase {
             System.out.println("something broke!!!");
             System.exit(1);
         }
-        
+
 
         myStmt.close();
         results.close();
@@ -81,7 +80,7 @@ public class CardDatabase {
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setLong(1, id);
         ResultSet results = myStmt.executeQuery();
-   
+
         boolean result = false; // shouldnt ever not get set by next line
         if(results.next()){
             result = results.getBoolean("type");
@@ -136,7 +135,7 @@ public class CardDatabase {
         if(rowCount == 0){
             throw new SQLException("No rows were changed.");
         }
-        
+
         myStmt.close();
     }
 
@@ -154,7 +153,7 @@ public class CardDatabase {
         if(rowCount == 0){
             throw new SQLException("No rows were changed.");
         }
-        
+
         myStmt.close();
     }
 
@@ -166,7 +165,7 @@ public class CardDatabase {
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setString(1, gameid);
         ResultSet results = myStmt.executeQuery();
-        
+
         while(results.next()){
             list.add(results.getString("seed"));
         }
@@ -268,7 +267,7 @@ public class CardDatabase {
         if(rowCount == 0){
             throw new SQLException("No rows were changed.");
         }
-        
+
         rs.close();
         stmt.close();
 
@@ -277,7 +276,7 @@ public class CardDatabase {
 
     public void updateSeasonPeak(String username, int newMMR) throws DBConnectException, SQLException {
         initializeConnection();
-    
+
         // Get the highest seasonNo
         String seasonQuery = "SELECT MAX(`seasonNo`) AS `currentSeason` FROM `Season`";
         Statement seasonStmt = dbConnect.createStatement();
@@ -291,19 +290,19 @@ public class CardDatabase {
         }
         seasonStmt.close();
         seasonResult.close();
-    
+
         // Check if the user is already in the Season_Peak table for the current season
         String query = "SELECT * FROM `Season_Peak` WHERE `player` = ? AND `season` = ?";
         PreparedStatement stmt = dbConnect.prepareStatement(query);
         stmt.setString(1, username);
         stmt.setInt(2, currentSeason);
         ResultSet rs = stmt.executeQuery();
-    
+
         if (rs.next()) {
             // User is already in the table for the current season
             int oldMMR = rs.getInt("peakMMR");
             int gamesPlayed = rs.getInt("gamesPlayed");
-    
+
             if (newMMR > oldMMR) {
                 // Update the MMR and increment gamesPlayed
                 query = "UPDATE `Season_Peak` SET `peakMMR` = ?, `gamesplayed` = ? WHERE `player` = ? AND `season` = ?";
@@ -329,16 +328,16 @@ public class CardDatabase {
             stmt.setInt(3, newMMR);
             stmt.setInt(4, 1);
         }
-    
+
         int rowCount = stmt.executeUpdate();
         if (rowCount == 0) {
             throw new SQLException("No rows were changed.");
         }
-    
+
         rs.close();
         stmt.close();
         dbConnect.close();
-    }    
+    }
 
     public void createAdmin(String username, String password) throws DBConnectException, SQLException {
         // Check if the username already exists
@@ -391,8 +390,42 @@ public class CardDatabase {
         if(rowCount == 0){
             throw new SQLException("No rows were changed.");
         }
-        
+
         myStmt.close();
+    }
+
+    public void clearDeck(String playerUsername) throws DBConnectException, SQLException {
+        initializeConnection();
+        String query = "DELETE FROM Deck WHERE player = ?";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, playerUsername);
+
+        int rowCount = myStmt.executeUpdate();
+        if(rowCount == 0){
+            throw new SQLException("No rows were changed.");
+        }
+
+        myStmt.close();
+    }
+
+    public ArrayList<Long> getDeck(String playerUsername) throws DBConnectException, SQLException {
+        ArrayList<Long> list = new ArrayList<Long>();
+
+        initializeConnection();
+        String query = "SELECT cardID FROM Deck WHERE player = ?";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, playerUsername);
+        ResultSet results = myStmt.executeQuery();
+
+        while(results.next()){
+            list.add(results.getLong("cardID"));
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return list;
     }
 
     /**
@@ -413,4 +446,3 @@ public class CardDatabase {
         }
     }
 }
-

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>CPSC 471 Website</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cardStyle.css">
+    <link rel="stylesheet" th:href="@{css/default.css}">
+    <script defer src="js/cardsApp.js"></script>
+</head>
+<body>
+    <div class="container" id="page-main">
+        <div class="nav-main" id="nav-body">
+            <nav id="navigation-bar">
+                <div class="logo">
+                    <img src="img/small.jpg" width="5%" height="5%">
+                </div>
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="games.html">Games</a></li>
+                        <li><a href="cards.html">Cards</a></li>
+                        <li><a href="season.html">Season</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div id="content-body" class="content=main">
+            <div class="page-title" id="page-title">
+                <h1>Cards</h1>
+            </div>
+            <div class="cards-display">
+                
+                <div class="cards-to-choose">
+                    <div class="row">
+                        <div class="card-holder hidden" id="card1-holder">
+                            <img src="img/small.jpg" id="card1" class="card draggable hand-only" draggable="true" >
+                        </div>
+                        <div class="card-holder hidden" id="sword-holder">
+                            <img src="img/sword.jpg" id="sword" class="card draggable hand-only" draggable="true">
+                        </div>
+                        <div class="card-holder hidden" id="card3-holder">
+                            <img src="img/shield.png" id="card3" class="card draggable body-only" draggable="true">
+                        </div>
+                        <div class="card-holder hidden" id="card4-holder">
+                            <img src="img/small.jpg" id="card4" class="card draggable body-only" draggable="true">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="deck-cards">
+                    <h1>Deck Cards</h1>
+                    
+                    <div class="hand-card">
+                        <h1>Hand cards</h1>
+                        <div id="hand-card-slot" class="selected-card-sub slot-1 outline-unselected-hand">
+
+                        </div>
+                        <div id="hand-card-slot" class="selected-card-sub slot-2 outline-unselected-hand">
+
+                        </div>
+                        <div id="hand-card-slot" class="selected-card-sub slot-3 outline-unselected-hand">
+
+                        </div>
+                    </div>
+                    <button class="save-button">SAVE</button>
+                    <div class="body-card">
+                        <h1>Body cards</h1>
+                        <div id="body-card-slot" class="selected-card-sub slot-1 outline-unselected-body"> 
+
+                        </div>
+                        <div id="body-card-slot" class="selected-card-sub slot-2 outline-unselected-body"> 
+
+                        </div>
+                        <div id="body-card-slot" class="selected-card-sub slot-3 outline-unselected-body"> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ads-slot">
+                    <h1>Your ad here</h1>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

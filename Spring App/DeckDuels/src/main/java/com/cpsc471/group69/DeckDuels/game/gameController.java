@@ -13,7 +13,7 @@ public class gameController {
     private Card p2b;
     private Player p1;
     private Player p2;
-
+    // THIS IS INCOMPLETE AS OF NOW.
     @GetMapping("/")
     public List<String> test(){
         return List.of("test", "test2", "test3");
@@ -26,6 +26,11 @@ public class gameController {
         // Item 1 is player 1 username followed by hand card then body card. Same for player 2.
         System.out.println(playerItems.getUsernamep1());
         System.out.println(playerItems.getUsernamep2());
+        System.out.println(Integer.parseInt(playerItems.getP1h()));
+        System.out.println(Integer.parseInt(playerItems.getP1b()));
+        System.out.println(Integer.parseInt(playerItems.getP2h()));
+        System.out.println(Integer.parseInt(playerItems.getP2b()));
+
         try{
             this.p1h = new Card(Integer.parseInt(playerItems.getP1h()));
             this.p1b = new Card(Integer.parseInt(playerItems.getP1b()));

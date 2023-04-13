@@ -16,12 +16,4 @@ public class gamesController {
         model.addAttribute("username", session.getAttribute("username"));
         return "games";
     }
-
-    @PostMapping("/gameRun")
-    public String gameRun(Model model, @RequestBody gameInfoStart gis){
-        model.addAttribute("username", "dannyp");
-        model.addAttribute("cardhandID", "103");
-        model.addAttribute("cardbodyID", "3");
-        return "gameRun";
-    }
 }

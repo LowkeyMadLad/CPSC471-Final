@@ -16,7 +16,7 @@
         <div class="nav-main" id="nav-body">
             <nav id="navigation-bar">
                 <div class="logo">
-                    <img src="img/small.jpg" width="5%" height="5%">
+                    <img th:src="@{img/logo.jpg}" width="25%" height="25%">
                 </div>
                 <div class="nav-links">
                     <ul>
@@ -42,7 +42,11 @@
                 <div class="selected-card-sub outline-unselected-body" id="body-card-selected">
                     
                 </div>
-                <button id="play-button-submit" style="background-color: red; padding: 3%;"></button>
+                <div>
+                    <form th:action="@{/gameRun}" method="get">
+                        <input type="submit" id="play-button-submit" style="background-color: red; padding: 3%;" value="Play!">
+                    </form>
+                </div>
             </div>
             <div class="deck-cards" id="deck-cards">
                 <h1>Deck Cards</h1>

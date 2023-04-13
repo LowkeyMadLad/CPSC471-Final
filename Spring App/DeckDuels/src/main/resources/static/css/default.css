@@ -52,3 +52,6 @@ nav{
     height: 500px;
     vertical-align: auto;
 }
+.hidden-input{
+    display: none;
+}

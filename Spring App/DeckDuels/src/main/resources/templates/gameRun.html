@@ -9,18 +9,18 @@
     <script defer src="js/gamesApp.js"></script>
 </head>
 <body>
-    <div id="session-username" type="text" class="hidden" th:value="@{username}"></div>
-    <div id="session-cardhandID" type="text" class="hidden" th:value="@{cardhandID}"></div>
-    <div id="session-cardbodyID" type="text" class="hidden" th:value="@{cardbodyID}"></div>
+    <div id="session-username" type="text" class="hidden" th:value="@{username}" style="display: none;"></div>
+    <div id="session-cardhandID" type="text" class="hidden" th:value="@{cardhandID}" style="display: none;"></div>
+    <div id="session-cardbodyID" type="text" class="hidden" th:value="@{cardbodyID}" style="display: none;"></div>
     <div class="container" id="page-main">
         <div class="nav-main" id="nav-body">
             <nav id="navigation-bar">
                 <div class="logo">
-                    <img src="img/small.jpg" width="5%" height="5%">
+                    <img src="img/logo.jpg" width="100%" height="100%">
                 </div>
                 <div class="nav-links">
                     <ul>
-                        <li><a href="games.html">Leave Game</a></li>
+                        <li><a th:href="@{/games}">Leave Game</a></li>
                     </ul>
                 </div>
             </nav>

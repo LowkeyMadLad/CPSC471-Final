@@ -137,6 +137,30 @@ public class gameSelectDBController {
         return jsonString;
     }
 
+    @GetMapping("game/playerhp/{p1}")
+    @CrossOrigin(origins = "*")
+    public String getPlayerHP(@PathVariable(value = "p1turn") String p1){
+        // p1 should be a boolean
+        // true if player 1
+        // false if it is the bot's hp you want
+        double hp = 300.0;
+        if(Boolean.parseBoolean(p1)){
+            hp = game.getPlayer1().hp;
+        } else{
+            hp = game.getPlayer2().hp;
+        }
+
+        String jsonString = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            jsonString = mapper.writeValueAsString(hp);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return jsonString;
+    }
+
     @GetMapping("game/end")
     @CrossOrigin(origins = "*")
     public String getEndMessage(){

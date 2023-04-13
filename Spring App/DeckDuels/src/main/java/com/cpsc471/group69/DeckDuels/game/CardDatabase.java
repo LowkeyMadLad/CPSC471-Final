@@ -582,6 +582,34 @@ public class CardDatabase {
         return list;
     }
 
+    public AccountInfo getAccountInfo(String username) throws DBConnectException, SQLException {
+        initializeConnection();
+        String query = "SELECT * FROM Player WHERE `username` = ?;";
+        PreparedStatement myStmt = dbConnect.prepareStatement(query);
+        myStmt.setString(1, username);
+        ResultSet results = myStmt.executeQuery();
+
+        String displayname = "ERROR";
+        int wins = -1;
+        int losses = -1;
+        int mmr = -1;
+        if(results.next()){
+            displayname = results.getString("displayname");
+            wins = results.getInt("wins");
+            losses = results.getInt("losses");
+            mmr = results.getInt("mmr");
+        } else {
+            System.out.println("something broke!!!");
+            System.exit(1);
+        }
+
+        myStmt.close();
+        results.close();
+        dbConnect.close();
+
+        return (new AccountInfo(username, displayname, wins, losses, mmr));
+    }
+
     /**
      * Initializes connection to the database
      * @throws DBConnectException

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 // import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.cpsc471.group69.DeckDuels.game.AccountInfo;
 import com.cpsc471.group69.DeckDuels.game.CardDatabase;
 import com.cpsc471.group69.DeckDuels.game.CardGame;
 import com.cpsc471.group69.DeckDuels.game.DBConnectException;
@@ -97,6 +98,30 @@ public class accountDBController {
         ObjectMapper mapper = new ObjectMapper();
         try{
             jsonStr = mapper.writeValueAsString(losses);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
+    }
+
+    @GetMapping("/account/getaccount/{username}")
+    @CrossOrigin(origins = "*")
+    public String getAccountInfo(@PathVariable(value = "username") String username){
+        AccountInfo acc = null;
+
+        try {
+            acc = db.getAccountInfo(username);
+        } catch (DBConnectException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(acc);
         } catch (Exception e){
             e.printStackTrace();
         }

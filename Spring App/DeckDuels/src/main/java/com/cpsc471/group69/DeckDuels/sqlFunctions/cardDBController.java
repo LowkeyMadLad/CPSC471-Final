@@ -71,6 +71,7 @@ public class cardDBController {
     public void saveDeck(@RequestBody String[] param){
         try {
             String username = param[0];
+            db.clearDeck(username);
             for(int i=1; i <= 6; i++){
                 long id = Long.parseLong(param[i]);
                 db.addCardToDeck(id, username);

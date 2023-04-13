@@ -2,10 +2,9 @@ console.log("loaded");
 const username = "dannyp";
 
 const gameselect = document.getElementById("game-select");
-gameselect.innerHTML
 const draggables = document.querySelectorAll('.draggable')
 const selectedCardSub = document.querySelectorAll('.selected-card-sub')
-
+document.getElementById("play-button-submit").addEventListener("click", onClickplay, false);
 
 // This detects if a card is being dragged and when the dragging has stopped
 draggables.forEach(draggable => {
@@ -104,14 +103,10 @@ selectedCardSub.forEach(selectCard => {
     })
 })
 
-// $.ajax({
-//     url: "https://localhost:8080/infoget/getdeck/" + username,
-//     dataType: "json",
-//     type: 'get',
-//     success: function(data){
-//         console.log(data);
-//     }
-// })
+function onClickplay(){
+    const selectedCards = document.querySelectorAll('.selected-card')
+    
+}
 
 // Doing an on click thing where on the play button it auto loads into a draft pick with the AI
 // Figuring out how to do that one now.

@@ -3,6 +3,7 @@ package com.cpsc471.group69.DeckDuels.controllers;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 // import org.springframework.ui.Model;
 import org.springframework.ui.Model;
@@ -18,7 +19,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class cardsController {
 
     @GetMapping("/cards")
-    public String cards(Model model){
+    public String cards(Model model, HttpSession session){
+        model.addAttribute("username", session.getAttribute("username"));
         return "cards";
     }
 }

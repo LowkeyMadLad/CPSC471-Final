@@ -213,6 +213,18 @@ public class CardDatabase {
         return exists;
     }
 
+    public boolean loginPlayer(String username, String password) throws DBConnectException, SQLException{
+        String query = "SELECT * FROM Player WHERE username = ? AND password = ?";
+        PreparedStatement stmt = dbConnect.prepareStatement(query);
+        stmt.setString(1, username);
+        stmt.setString(2, password);
+        ResultSet rs = stmt.executeQuery();
+        boolean exists = rs.next();
+        rs.close();
+        stmt.close();
+        return exists;
+    }
+
     public boolean checkPlayerBanned(String username) throws DBConnectException, SQLException, BannedPlayerException {
         String query = "SELECT * FROM Bans WHERE player = ?";
         PreparedStatement stmt = dbConnect.prepareStatement(query);

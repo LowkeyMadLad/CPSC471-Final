@@ -5,18 +5,38 @@ import java.util.ArrayList;
 
 // import org.springframework.stereotype.Controller;
 // import org.springframework.ui.Model;
+import com.cpsc471.group69.DeckDuels.controllers.accountInfo;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.*;
 
 import com.cpsc471.group69.DeckDuels.game.PlayerStatInfo;
 import com.cpsc471.group69.DeckDuels.game.CardDatabase;
 import com.cpsc471.group69.DeckDuels.game.CardGame;
 import com.cpsc471.group69.DeckDuels.game.DBConnectException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class accountDBController {
     CardDatabase db = CardDatabase.getDB();
+
+    @PostMapping("/account/login")
+    public String getPlayerExists(@RequestBody accountInfo account, HttpServletRequest request){
+        boolean login;
+        try {
+            login = db.loginPlayer(account.getUsername(), account.getPassword());
+            String ret;
+            if (login){
+                ret = "true";
+            } else {
+                ret = "false";
+            }
+            return ret;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "failed";
+    }
 
     @GetMapping("/account/getname/{username}")
     @CrossOrigin(origins = "*")

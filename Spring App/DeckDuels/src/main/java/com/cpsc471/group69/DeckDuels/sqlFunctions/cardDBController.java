@@ -65,4 +65,18 @@ public class cardDBController {
 
         return jsonString;
     }
+
+    @PostMapping("/cards/submitdeck")
+    @CrossOrigin(origins = "*")
+    public void saveDeck(@RequestBody String[] param){
+        try {
+            String username = param[0];
+            for(int i=1; i <= 6; i++){
+                long id = Long.parseLong(param[i]);
+                db.addCardToDeck(id, username);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -19,7 +19,7 @@ public class cardDBController {
 
     @GetMapping("/cards/getallcards/{username}")
     @CrossOrigin(origins = "*")
-    public ArrayList<Long> getCards(@PathVariable(value = "username") String username){
+    public String getCards(@PathVariable(value = "username") String username){
         ArrayList<Long> cards = new ArrayList<Long>();
         ArrayList<Long> uniques = new ArrayList<Long>();
 
@@ -34,14 +34,34 @@ public class cardDBController {
 
         if(uniques.isEmpty()){
             // user owns no unique cards
-            return cards;
-        } else {
+            String jsonStr = null;
+            ObjectMapper mapper = new ObjectMapper();
+            try{
+                jsonStr = mapper.writeValueAsString(cards);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            if (jsonStr == null){
+                throw new IllegalArgumentException();
+            }
+            return jsonStr;
+            } else {
             for(long i : uniques){
                 cards.add(i);
             }
         }
 
-        return cards;
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(cards);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
     }
 
     @GetMapping("/cards/getcard/{cardID}")

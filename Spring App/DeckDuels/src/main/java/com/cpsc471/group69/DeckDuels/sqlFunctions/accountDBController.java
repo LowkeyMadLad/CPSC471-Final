@@ -26,51 +26,91 @@ public class accountDBController {
         } catch (DBConnectException | SQLException e) {
             e.printStackTrace();
         }
-        return un;
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(un);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
     }
 
     // player statistics 
     @GetMapping("/account/getmmr/{username}")
     @CrossOrigin(origins = "*")
-    public int getMMR(@PathVariable(value = "username") String username){
+    public String getMMR(@PathVariable(value = "username") String username){
         int mmr = -1;
         try {
             mmr = db.getPlayerMMR(username);
         } catch (DBConnectException | SQLException e) {
             e.printStackTrace();
         }
-        return mmr;
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(mmr);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
     }
 
     @GetMapping("/account/getwins/{username}")
     @CrossOrigin(origins = "*")
-    public int getWins(@PathVariable(value = "username") String username){
+    public String getWins(@PathVariable(value = "username") String username){
         int wins = -1;
         try {
             wins = db.getPlayerWins(username);
         } catch (DBConnectException | SQLException e) {
             e.printStackTrace();
         }
-        return wins;
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(wins);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
     }
 
     @GetMapping("/account/getlosses/{username}")
     @CrossOrigin(origins = "*")
-    public int getLosses(@PathVariable(value = "username") String username){
+    public String getLosses(@PathVariable(value = "username") String username){
         int losses = -1;
         try {
             losses = db.getPlayerLosses(username);
         } catch (DBConnectException | SQLException e) {
             e.printStackTrace();
         }
-        return losses;
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(losses);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
     }
 
     // game history
 
     @GetMapping("/account/games/{username}")
     @CrossOrigin(origins = "*")
-    public ArrayList<String> getGameHistory(@PathVariable(value = "username") String username){
+    public String getGameHistory(@PathVariable(value = "username") String username){
         ArrayList<String> history = new ArrayList<String>();
 
         try {
@@ -83,7 +123,17 @@ public class accountDBController {
             // ???
         }
 
-        return history;
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(history);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
     }
 
     @GetMapping("/account/gamesbyid/{gameID}")
@@ -96,6 +146,16 @@ public class accountDBController {
             e.printStackTrace();
         }
 
-        return game;
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(game);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
     }
 }

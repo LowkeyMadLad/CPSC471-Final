@@ -21,7 +21,7 @@ public class seasonDBController {
 
     @GetMapping("/season/getallseasonpeaks/{username}")
     @CrossOrigin(origins = "*")
-    public ArrayList<String> getAllSeasonPeaks(@PathVariable(value = "username") String username){
+    public String getAllSeasonPeaks(@PathVariable(value = "username") String username){
         ArrayList<String> list = new ArrayList<String>();
         ArrayList<SeasonPeak> seasonList = new ArrayList<SeasonPeak>();
 
@@ -47,7 +47,17 @@ public class seasonDBController {
         }
 
         // returns array list of json strings
-        return list;
+        jsonStr = null;
+        mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(list);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
     }
 
 }

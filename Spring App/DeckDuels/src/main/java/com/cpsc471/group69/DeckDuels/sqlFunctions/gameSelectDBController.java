@@ -139,7 +139,7 @@ public class gameSelectDBController {
 
     @GetMapping("game/playerhp/{p1}")
     @CrossOrigin(origins = "*")
-    public String getPlayerHP(@PathVariable(value = "p1turn") String p1){
+    public String getPlayerHP(@PathVariable(value = "{p1}") String p1){
         // p1 should be a boolean
         // true if player 1
         // false if it is the bot's hp you want

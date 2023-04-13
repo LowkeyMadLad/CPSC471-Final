@@ -59,14 +59,14 @@ public class gameSelectDBController {
     @PostMapping("/game/start")
     @CrossOrigin(origins = "*")
     public String startGame(@RequestBody String[] cards){
+        // bot random cards
+        int randomhand = 100 + getRandomNumber(1, 8);
+        int randombody = getRandomNumber(1, 8);
         try {
             String user = cards[0];
             String body = cards[1];
             String hand = cards[2];
             Player p1 = new Player(user, new Card(Integer.parseInt(hand)), new Card(Integer.parseInt(body)));
-            // bot random cards
-            int randomhand = 100 + getRandomNumber(1, 8);
-            int randombody = getRandomNumber(1, 8);
             Player p2 = new Player("BOT", new Card(randomhand), new Card(randombody));
             game = new CardGame(p1, p2);
         } catch (Exception e) {
@@ -74,10 +74,13 @@ public class gameSelectDBController {
             System.exit(1);
         }
 
+        int[] botcards = new int[2];
+        botcards[0] = randombody;
+        botcards[1] = randomhand;
         String jsonString = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            jsonString = mapper.writeValueAsString("GAME STARTED!!!");
+            jsonString = mapper.writeValueAsString(botcards);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

@@ -68,7 +68,7 @@ public class cardDBController {
 
     @PostMapping("/cards/submitdeck")
     @CrossOrigin(origins = "*")
-    public void saveDeck(@RequestBody String[] param){
+    public String saveDeck(@RequestBody String[] param){
         try {
             String username = param[0];
             db.clearDeck(username);
@@ -79,5 +79,13 @@ public class cardDBController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        String jsonString = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            jsonString = mapper.writeValueAsString("successful");
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return jsonString;
     }
 }

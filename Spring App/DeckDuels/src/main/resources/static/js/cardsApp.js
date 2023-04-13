@@ -34,7 +34,6 @@ selectedCardSub.forEach(selectCard => {
     selectCard.addEventListener("drop", e => {
         e.preventDefault() // Same as above
         const draggable = document.querySelector('.dragging') // Grabs the card being dragged
-        
         /**
          * This if block is for if there is no card in the selected slot or if there is.
          * if the childnodes have a length of 1, then there is nothing in it. Thus it uses empty logic
@@ -80,20 +79,27 @@ selectedCardSub.forEach(selectCard => {
         else{ // this is when a card slot is already populated. It will remove the already existing one and add the new one
             if (selectCard.classList.contains("body-card-slot-holder")) { // Body Card
                 if (draggable.classList.contains("body-only")) { // Only does something if it is in the right slot
-                    const replaceable = document.querySelector('.body-card-slot') // Gets the item currently in the body slot
+                    var replaceable;
                     // Deals with the slot adding and removing
                     if (selectCard.classList.contains("slot-1")) {
+                        replaceable = document.querySelector('.body-card-slot.slot-1') // Gets the item currently in the body slot
+                        console.log(replaceable);
                         draggable.classList.add("slot-1")
                         replaceable.classList.remove('slot-1')
                     }
                     if (selectCard.classList.contains("slot-2")) {
+                        replaceable = document.querySelector('.body-card-slot.slot-2')
+                        console.log(replaceable);
                         draggable.classList.add("slot-2")
                         replaceable.classList.remove('slot-2')
                     }
                     if (selectCard.classList.contains("slot-3")) {
+                        replaceable = document.querySelector('.body-card-slot.slot-3')
+                        console.log(replaceable);
                         draggable.classList.add("slot-3")
                         replaceable.classList.remove('slot-3')
                     }
+                    console.log(replaceable);
                     // Finds the location to put the card being replaced, and then places it in that slot. Then appends the new card
                     var sendToSlot = replaceable.id + "-holder";
                     const replacableSlot = document.getElementById(sendToSlot)
@@ -108,20 +114,24 @@ selectedCardSub.forEach(selectCard => {
             // This else is the same as above just for the hand slot
             else { // Hand card
                 if (draggable.classList.contains("hand-only")) {
-                    const replaceable = document.querySelector('.hand-card-slot') // Gets the item currently in the body slot
-                    console.log(replaceable)
+                    var replaceable;
+                    // Gets the item currently in the body slot
                     if (selectCard.classList.contains("slot-1")) {
+                        replaceable = document.querySelector('.hand-card-slot.slot-1')
                         draggable.classList.add("slot-1")
                         replaceable.classList.remove('slot-1')
                     }
                     if (selectCard.classList.contains("slot-2")) {
+                        replaceable = document.querySelector('.hand-card-slot.slot-2')
                         draggable.classList.add("slot-2")
                         replaceable.classList.remove('slot-2')
                     }
                     if (selectCard.classList.contains("slot-3")) {
+                        replaceable = document.querySelector('.hand-card-slot.slot-3')
                         draggable.classList.add("slot-3")
                         replaceable.classList.remove('slot-3')
                     }
+                    console.log(replaceable);
                     var sendToSlot = replaceable.id + "-holder";
                     const replacableSlot = document.getElementById(sendToSlot)
                     replaceable.classList.remove('hand-card-slot')
@@ -139,23 +149,28 @@ selectedCardSub.forEach(selectCard => {
 })
 
 // This is an intersection ovserver for when we add more cards. Adds a fade in and out animation
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        } else {
-            entry.target.classList.remove('show');
-        }
-    });
-});
- 
-// For fade in and out animation
-const hiddenElements = document.querySelectorAll('.hidden');
-hiddenElements.forEach((el) => observer.observe(el));
+
+document.getElementById("save-button").addEventListener("click", onClickSave, false);
 
 function onClickSave(){
     const selectedCards = document.querySelectorAll('.selected-card')
-    
+    console.log("button pressed")
+    let list = [];
+    list.push("dannyp");
+    selectedCards.forEach(selcard =>{
+        list.push(selcard.id);
+    });
+    if (list.length === 7) {
+        fetch("https://localhost:433/cards/submitdeck", {
+            method: "POST",
+            body: JSON.stringify(list),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }) .then((response) => response.json()).then((json) => console.log(json));
+    } else {
+        console.log("Information is invalid")
+    }
 }
 
 

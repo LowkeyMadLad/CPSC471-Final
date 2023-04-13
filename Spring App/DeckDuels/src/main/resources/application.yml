@@ -1,5 +1,5 @@
 server:
-  port: 443
+  port: 433
   ssl:
     enabled: true
     key-alias: local_ssl

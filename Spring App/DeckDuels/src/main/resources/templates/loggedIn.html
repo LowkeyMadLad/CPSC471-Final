@@ -9,7 +9,7 @@
     <script defer th:src="@{js/accountApp.js}"></script>
 </head>
 <body>
-    <input id="session-username" type="text" class="hidden" th:value="@{username}">
+    <div id="session-username" type="text" class="hidden" th:value="@{username}"></div>
     <div class="container" id="page-main">
         <div class="nav-main" id="nav-body">
             <nav id="navigation-bar">
@@ -34,6 +34,5 @@
             </div>
         </div>
     </div>
-    <script src="js/login.js"></script>
 </body>
 </html>

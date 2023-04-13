@@ -19,24 +19,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class accountDBController {
     CardDatabase db = CardDatabase.getDB();
 
-    @PostMapping("/account/login")
-    public String getPlayerExists(@RequestBody accountInfo account, HttpServletRequest request){
-        boolean login;
-        try {
-            login = db.loginPlayer(account.getUsername(), account.getPassword());
-            String ret;
-            if (login){
-                ret = "true";
-            } else {
-                ret = "false";
-            }
-            return ret;
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return "failed";
-    }
+//    @PostMapping("/account/login")
+//    public String getPlayerExists(@RequestBody accountInfo account, HttpServletRequest request){
+//        boolean login;
+//        try {
+//            login = db.loginPlayer(account.getUsername(), account.getPassword());
+//            String ret;
+//            if (login){
+//                ret = "true";
+//            } else {
+//                ret = "false";
+//            }
+//            return ret;
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        return "failed";
+//    }
 
     @GetMapping("/account/getname/{username}")
     @CrossOrigin(origins = "*")

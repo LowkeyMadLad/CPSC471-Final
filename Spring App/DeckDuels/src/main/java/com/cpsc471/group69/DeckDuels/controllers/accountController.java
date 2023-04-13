@@ -48,4 +48,10 @@ public class accountController {
         return "loggedIn";
     }
 
+    @GetMapping("/loggedIn")
+    public String loggedIn(Model model, HttpSession session){
+        return "loggedIn";
+
+    }
+
 }

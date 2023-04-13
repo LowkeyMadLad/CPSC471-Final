@@ -7,7 +7,7 @@ import java.util.ArrayList;
 // import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.cpsc471.group69.DeckDuels.game.AccountInfo;
+import com.cpsc471.group69.DeckDuels.game.PlayerStatInfo;
 import com.cpsc471.group69.DeckDuels.game.CardDatabase;
 import com.cpsc471.group69.DeckDuels.game.CardGame;
 import com.cpsc471.group69.DeckDuels.game.DBConnectException;
@@ -110,7 +110,7 @@ public class accountDBController {
     @GetMapping("/account/getaccount/{username}")
     @CrossOrigin(origins = "*")
     public String getAccountInfo(@PathVariable(value = "username") String username){
-        AccountInfo acc = null;
+        PlayerStatInfo acc = null;
 
         try {
             acc = db.getAccountInfo(username);

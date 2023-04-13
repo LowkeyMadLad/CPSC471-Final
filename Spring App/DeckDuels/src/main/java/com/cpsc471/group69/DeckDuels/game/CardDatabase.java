@@ -582,7 +582,7 @@ public class CardDatabase {
         return list;
     }
 
-    public AccountInfo getAccountInfo(String username) throws DBConnectException, SQLException {
+    public PlayerStatInfo getAccountInfo(String username) throws DBConnectException, SQLException {
         initializeConnection();
         String query = "SELECT * FROM Player WHERE `username` = ?;";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
@@ -607,7 +607,7 @@ public class CardDatabase {
         results.close();
         dbConnect.close();
 
-        return (new AccountInfo(username, displayname, wins, losses, mmr));
+        return (new PlayerStatInfo(username, displayname, wins, losses, mmr));
     }
 
     /**

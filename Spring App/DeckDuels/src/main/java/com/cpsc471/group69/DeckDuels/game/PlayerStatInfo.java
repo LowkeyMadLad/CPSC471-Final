@@ -1,7 +1,7 @@
 package com.cpsc471.group69.DeckDuels.game;
 
 // mickey mouse struct
-public class AccountInfo {
+public class PlayerStatInfo {
     String username;
     // String password;
     String displayname;
@@ -9,7 +9,7 @@ public class AccountInfo {
     int losses;
     int mmr;
 
-    public AccountInfo(String user, String dispName, int w, int l, int mmr){
+    public PlayerStatInfo(String user, String dispName, int w, int l, int mmr){
         this.username = user;
         this.displayname = dispName;
         this.wins = w;

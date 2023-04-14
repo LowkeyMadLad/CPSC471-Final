@@ -66,8 +66,12 @@ public class gameSelectDBController {
             String user = cards[0];
             String body = cards[1];
             String hand = cards[2];
-            Player p1 = new Player(user, new Card(Integer.parseInt(hand)), new Card(Integer.parseInt(body)));
-            Player p2 = new Player("BOT", new Card(randomhand), new Card(randombody));
+            Card p1h = new Card(Integer.parseInt(hand));
+            Card p1b = new Card(Integer.parseInt(body));
+            Card p2h = new Card(randomhand);
+            Card p2b = new Card(randombody);
+            Player p1 = new Player(user, p1h, p1b);
+            Player p2 = new Player("BOT", p2h, p2b);
             game = new CardGame(p1, p2);
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,9 +91,9 @@ public class gameSelectDBController {
         return jsonString;
     }
 
-    @GetMapping("/game/{turn}")
+    @PostMapping("/game/turn")
     @CrossOrigin(origins = "*")
-    public String playTurn(@PathVariable(value = "turn") String[] turnStr){
+    public String playTurn(@RequestBody String[] turnStr){
         // hi ryan
         // the sent in parameter should be two booleans
         // index 0 represents IF IT IS PLAYER 1'S TURN
@@ -137,12 +141,13 @@ public class gameSelectDBController {
         return jsonString;
     }
 
-    @GetMapping("game/playerhp/{p1}")
+    @PostMapping("game/playerhp")
     @CrossOrigin(origins = "*")
-    public String getPlayerHP(@PathVariable(value = "{p1}") String p1){
+    public String getPlayerHP(@RequestBody String p1){
         // p1 should be a boolean
         // true if player 1
         // false if it is the bot's hp you want
+        System.out.println(p1);
         double hp = 300.0;
         if(Boolean.parseBoolean(p1)){
             hp = game.getPlayer1().hp;

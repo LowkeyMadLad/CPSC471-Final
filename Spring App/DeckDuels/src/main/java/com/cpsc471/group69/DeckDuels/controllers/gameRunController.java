@@ -11,9 +11,6 @@ public class gameRunController {
     @GetMapping("/gameRun")
     @CrossOrigin(origins = "*")
     public String gameRun(Model model){
-        model.addAttribute("username", "dannyp");
-        model.addAttribute("cardhandID", "103");
-        model.addAttribute("cardbodyID", "3");
         return "gameRun";
     }
 }

@@ -137,6 +137,7 @@ public class CardDatabase {
         }
 
         myStmt.close();
+        dbConnect.close();
     }
 
     public void addMove(String gameID, String moveSeed) throws DBConnectException, SQLException{
@@ -155,6 +156,7 @@ public class CardDatabase {
         }
 
         myStmt.close();
+        dbConnect.close();
     }
 
     public ArrayList<String> getGameMoves(String gameid) throws DBConnectException, SQLException{
@@ -179,6 +181,8 @@ public class CardDatabase {
 
     // for accounts
     public void createPlayer(String username, String password, String displayname) throws DBConnectException, SQLException {
+        initializeConnection();
+
         // Check if the username already exists
         if (checkPlayerExists(username)) {
             throw new IllegalArgumentException("Username already exists.");
@@ -200,9 +204,11 @@ public class CardDatabase {
         }
 
         stmt.close();
+        dbConnect.close();
     }
 
     public boolean checkPlayerExists(String username) throws DBConnectException, SQLException {
+        initializeConnection();
         String query = "SELECT * FROM Player WHERE username = ?";
         PreparedStatement stmt = dbConnect.prepareStatement(query);
         stmt.setString(1, username);
@@ -210,10 +216,12 @@ public class CardDatabase {
         boolean exists = rs.next();
         rs.close();
         stmt.close();
+        dbConnect.close();
         return exists;
     }
 
     public boolean loginPlayer(String username, String password) throws DBConnectException, SQLException{
+        initializeConnection();
         String query = "SELECT * FROM Player WHERE username = ? AND password = ?";
         PreparedStatement stmt = dbConnect.prepareStatement(query);
         stmt.setString(1, username);
@@ -222,10 +230,12 @@ public class CardDatabase {
         boolean exists = rs.next();
         rs.close();
         stmt.close();
+        dbConnect.close();
         return exists;
     }
 
     public boolean checkPlayerBanned(String username) throws DBConnectException, SQLException, BannedPlayerException {
+        initializeConnection();
         String query = "SELECT * FROM Bans WHERE player = ?";
         PreparedStatement stmt = dbConnect.prepareStatement(query);
         stmt.setString(1, username);
@@ -233,6 +243,7 @@ public class CardDatabase {
         boolean isBanned = rs.next();
         rs.close();
         stmt.close();
+        dbConnect.close();
         // if (isBanned) {
         //     throw new BannedPlayerException("You have been banned from the game.");
         // }
@@ -282,6 +293,7 @@ public class CardDatabase {
 
         rs.close();
         stmt.close();
+        dbConnect.close();
 
         updateSeasonPeak(username, mmr);
     }
@@ -353,6 +365,7 @@ public class CardDatabase {
     }
 
     public void createAdmin(String username, String password) throws DBConnectException, SQLException {
+        initializeConnection();
         // Check if the username already exists
         if (checkPlayerExists(username)) {
             throw new IllegalArgumentException("Username already exists.");
@@ -369,9 +382,11 @@ public class CardDatabase {
         }
 
         stmt.close();
+        dbConnect.close();
     }
 
     public void banPlayer(String playerToBan, String admin) throws DBConnectException, SQLException {
+        initializeConnection();
         // Check if the player getting banned exists
         if (!checkPlayerExists(playerToBan)) {
             throw new IllegalArgumentException("No such player exists.");
@@ -388,6 +403,7 @@ public class CardDatabase {
         }
 
         stmt.close();
+        dbConnect.close();
     }
 
     // for front end
@@ -405,6 +421,7 @@ public class CardDatabase {
         }
 
         myStmt.close();
+        dbConnect.close();
     }
 
     public void clearDeck(String playerUsername) throws DBConnectException, SQLException {
@@ -419,6 +436,7 @@ public class CardDatabase {
         }
 
         myStmt.close();
+        dbConnect.close();
     }
 
     public ArrayList<Long> getDeck(String playerUsername) throws DBConnectException, SQLException {

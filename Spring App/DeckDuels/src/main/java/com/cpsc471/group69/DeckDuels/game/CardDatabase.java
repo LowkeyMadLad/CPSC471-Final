@@ -595,7 +595,7 @@ public class CardDatabase {
         ArrayList<String> list = new ArrayList<String>();
 
         initializeConnection();
-        String query = "SELECT `gameID` FROM Game WHERE player1 = ? OR player2 = ?";
+        String query = "SELECT `gameID` FROM Game WHERE player1 = ? OR player2 = ? ORDER BY `datetime` DESC";
         PreparedStatement myStmt = dbConnect.prepareStatement(query);
         myStmt.setString(1, username);
         myStmt.setString(2, username);

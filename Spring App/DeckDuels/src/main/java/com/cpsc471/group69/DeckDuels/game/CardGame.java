@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class CardGame {
     // will use java's built in UUID for this
-    private static final String id = UUID.randomUUID().toString();
+    private final String id = UUID.randomUUID().toString();
 
     private boolean gameover;
     private Player winner; 

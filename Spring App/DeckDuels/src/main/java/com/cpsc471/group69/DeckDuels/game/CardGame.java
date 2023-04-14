@@ -185,6 +185,10 @@ public class CardGame {
      * @return Move that will be displayed by the game log. 
      */
     public String playGameTurn(boolean p1, boolean attack){
+        if(gameover){
+            System.out.println("THE GAME IS ALREADY OVER STOP PLAYING");
+            return "The game is over.";
+        }
         Player player;
         Player enemy;
         // SEED: {player}{crit}-{dmg} attack or {player} defend

@@ -246,6 +246,7 @@ public class CardGame {
             // case "D" on terminal version
             player.defLastTurn = true;
         }
+        moves.add(moveseed);
         return readMove(moveseed);
     }
 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{css/gameStyle.css}">
     <link rel="stylesheet" th:href="@{css/cardStyle.css}">
     <link rel="stylesheet" th:href="@{css/default.css}">
-    <script defer th:src="@{js/gameSelectApp.js}"></script>
+<!--    <script defer th:src="@{js/gameSelectApp.js}"></script>-->
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -35,13 +35,15 @@
             </div>
             <div id="game-select" style="text-align: center; align-items: center;">
                 <p style="font-size: 24px;">For initial testing purposes, the only available mode to play right now is vs AI.</p>
-                <p style="font-size: 24px;">After selecting your cards on the Cards screen, please hit Play!</p>
-                <div class="selected-card-sub outline-unselected-hand" id="hand-card-selected">
-                    
-                </div>
-                <div class="selected-card-sub outline-unselected-body" id="body-card-selected">
-                    
-                </div>
+                <p style="font-size: 24px;">One random card of each type will be selected when you enter game.</p>
+                <p style="font-size: 24px;">Please press the play button!</p>
+                
+<!--                <div class="selected-card-sub outline-unselected-hand" id="hand-card-selected">-->
+<!--                    -->
+<!--                </div>-->
+<!--                <div class="selected-card-sub outline-unselected-body" id="body-card-selected">-->
+<!--                    -->
+<!--                </div>-->
                 <div>
                     <form th:action="@{/gameRun}" method="get">
                         <input type="submit" id="play-button-submit" style="background-color: red; padding: 3%;" value="Play!">
@@ -74,7 +76,7 @@
 
                     </div>
                 </div>
-                
+                <script th:src="@{js/gameSelectOnStart.js}"></script>
             </div>
             <div class="ads-slot">
                 <h1>Your ad here</h1>

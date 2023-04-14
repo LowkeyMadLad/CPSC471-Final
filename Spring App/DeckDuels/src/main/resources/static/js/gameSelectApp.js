@@ -4,7 +4,6 @@ const username = "dannyp";
 const gameselect = document.getElementById("game-select");
 const draggables = document.querySelectorAll('.draggable')
 const selectedCardSub = document.querySelectorAll('.selected-card-sub')
-document.getElementById("play-button-submit").addEventListener("click", onClickplay, false);
 
 // This detects if a card is being dragged and when the dragging has stopped
 draggables.forEach(draggable => {
@@ -34,7 +33,7 @@ selectedCardSub.forEach(selectCard => {
          */
         if(selectCard.childNodes.length == 1){
             // This if and else if are for making sure the card goes into the only slot it is allowed too
-            if (selectCard.id === "body-card-slot" && draggable.classList.contains("body-only")) {
+            if (selectCard.id === "body-card-selected" && draggable.classList.contains("body-only")) {
                 draggable.classList.add('body-card-slot') // This is for logic and potential styling
                 selectCard.appendChild(draggable)
                 draggable.classList.add("selected-card")
@@ -42,7 +41,7 @@ selectedCardSub.forEach(selectCard => {
                 selectCard.classList.add("outline-selected-body")
             } 
             // This is identical as above but for hand instead of body.
-            else if(selectCard.id === "hand-card-slot" && draggable.classList.contains("hand-only")){
+            else if(selectCard.id === "hand-card-selected" && draggable.classList.contains("hand-only")){
                 draggable.classList.add('hand-card-slot')
                 selectCard.appendChild(draggable)
                 draggable.classList.add("selected-card")
@@ -102,11 +101,6 @@ selectedCardSub.forEach(selectCard => {
 
     })
 })
-
-function onClickplay(){
-    const selectedCards = document.querySelectorAll('.selected-card')
-    
-}
 
 // Doing an on click thing where on the play button it auto loads into a draft pick with the AI
 // Figuring out how to do that one now.

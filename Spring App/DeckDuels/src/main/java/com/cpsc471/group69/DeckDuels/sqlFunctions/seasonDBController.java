@@ -38,12 +38,14 @@ public class seasonDBController {
         String jsonStr;
         ObjectMapper mapper = new ObjectMapper();
         for(SeasonPeak sp : seasonList){
-            try {
-                jsonStr = mapper.writeValueAsString(sp);
-                list.add(jsonStr);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
+            // try {
+            //     jsonStr = mapper.writeValueAsString(sp);
+            //     list.add(jsonStr);
+            // } catch (JsonProcessingException e) {
+            //     e.printStackTrace();
+            // }
+            String msg = "Season: "+sp.season+"    |   Peak MMR: "+sp.mmr+"   |   Total Games Played: "+sp.games;
+            list.add(msg);
         }
 
         // returns array list of json strings

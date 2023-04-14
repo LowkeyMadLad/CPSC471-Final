@@ -6,9 +6,9 @@ package com.cpsc471.group69.DeckDuels.game;
 // solely for display.
 public class SeasonPeak {
     // Timestamp startDate;
-    int season;
-    int games;
-    int mmr;
+    public int season;
+    public int games;
+    public int mmr;
 
     public SeasonPeak(int season, int games, int mmr){
         this.season = season;

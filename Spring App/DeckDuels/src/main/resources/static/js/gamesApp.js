@@ -1,7 +1,96 @@
 console.log("loaded");
 const usernamePlayer = "dannyp";
-const cardhandIDPlayer = "103";
-const cardbodyIDPlayer = "3";
+var cardhandIDPlayer = null;
+var cardbodyIDPlayer = null;
+
+initialLoading();
+
+async function initialLoading(){
+    await setPlayerIDs();
+    console.log("This is the body card ID: "+ cardbodyIDPlayer)
+    console.log("This is the hand card ID: "+ cardhandIDPlayer)
+    await runStart();
+}
+
+function randomIntFromInterval(min, max) { // min and max included 
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+async function getPlayerIDs(){
+    let obj;
+    const result = fetch("https://localhost:433/cards/getdeck/" + usernamePlayer, {
+        method: "GET",
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+
+    obj = (await result).json();
+
+    console.log(obj);
+
+    return obj;
+}
+
+async function setPlayerIDs(){
+    var cards = await getPlayerIDs();
+    let scrambled = [];
+    var endCardHand = null;
+    var endCardBody = null;
+    // This section scrambles a random selection of 6 cards
+    for (let i = 0; i < 6; i++) {
+        x = randomIntFromInterval(0,5);
+        scrambled.push(cards[x]);
+        if (endCardBody == null){
+            w = cards[i];
+            if (w > 1000) {
+                w = w - 1000;
+            }
+            if (w < 100) {
+                endCardBody = cards[i];
+            }
+        } else if (endCardHand == null) {
+            w = cards[i];
+            if (w > 1000) {
+                w = w - 1000;
+            }
+            if (w > 100) {
+                endCardHand = cards[i];
+            }
+        }
+    }
+    // this one selects the LAST of each card type. Defaulting to the first card in the deck if failed
+    for (let j = 0; j < 6; j++) {
+        if (cardbodyIDPlayer == null){
+            w = scrambled[j];
+            if (w > 1000) {
+                w = w - 1000;
+            }
+            if (w < 100) {
+                cardbodyIDPlayer = scrambled[j];
+            }
+        } else if (cardhandIDPlayer == null) {
+            w = scrambled[j];
+            if (w > 1000) {
+                w = w - 1000;
+            }
+            if (w > 100) {
+                cardhandIDPlayer = scrambled[j];
+            }
+        }
+        
+    }
+    // fail safe
+    if (cardhandIDPlayer == null) {
+        console.error("Using Default hand")
+        cardhandIDPlayer = cards[0];
+    }
+    if (cardbodyIDPlayer == null) {
+        console.error("Using Default body")
+        cardbodyIDPlayer = cards[3]
+    }
+}
+
 
 var p1turn = true;
 var p1DefendLastTurn = false;
@@ -146,7 +235,7 @@ function getPageLayout(cardbothand, cardbotbody, cardp1hand, cardp1body){
     return htmlCard;
 }
 
-runStart();
+
 
 async function leaveGame(){
     let obj;
@@ -247,7 +336,7 @@ async function onPlayerPress(string) {
     var actionlog;
     var temp;
     turn++;
-    console.log(turn);
+    console.log("Turn: " + turn);
     if (string === "defend" && !p1DefendLastTurn) {
         actionlog = await playerMove("false");
         updateActionLog(actionlog);
@@ -263,17 +352,17 @@ async function onPlayerPress(string) {
         p1DefendLastTurn = false;
         enableDefend();
     }
-    console.log("THIS IS TEMP: " + temp);
     gameEnd = JSON.parse(temp);
-    console.log("THIS IS THE GAME END VARIABLE: " + gameEnd)
+    console.log("Game end: " + gameEnd)
     if (gameEnd) {
         console.log("Game Ended on P1 Turn")
+        updateActionLog("Player 1 has won!")
         return;
 
     }
     p1turn = false;
     turn++;
-    console.log(turn);
+    console.log("Turn: " + turn);
     var botDefend = Math.random() < 0.5;
     if (botDefend && !p2DefendLastTurn) {
         actionlog = await playerMove("false");
@@ -288,13 +377,12 @@ async function onPlayerPress(string) {
         temp = await verifyGameState();
         p2DefendLastTurn = false;
     }
-    console.log("THIS IS TEMP: " + temp);
     gameEnd = JSON.parse(temp);
-    console.log("THIS IS THE GAME END VARIABLE: " + gameEnd)
+    console.log("Game end: " + gameEnd)
     if (gameEnd) {
         console.log("Game Ended on P2 Turn")
+        updateActionLog("Player 2 has won!")
         return;
-
     }
     p1turn = true;
 

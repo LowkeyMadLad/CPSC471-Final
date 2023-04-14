@@ -2,6 +2,7 @@ package com.cpsc471.group69.DeckDuels.sqlFunctions;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 // import org.springframework.stereotype.Controller;
 // import org.springframework.ui.Model;
@@ -107,5 +108,32 @@ public class cardDBController {
             e.printStackTrace();
         }
         return jsonString;
+    }
+
+    @GetMapping("/cards/getdeck/{username}")
+    @CrossOrigin(origins = "*")
+    public String getDeck(@PathVariable(value = "username") String username){
+        ArrayList<Long> cardIDs = null;
+        String jsonStr = null;
+        try{
+            cardIDs = db.getDeck(username);
+            System.out.println(cardIDs.get(0));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (cardIDs.isEmpty()){
+            throw new IllegalArgumentException("cardID's returned null or none");
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(cardIDs);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        System.out.println("THIS IS THE JSON STRING: " + jsonStr);
+        return jsonStr;
     }
 }

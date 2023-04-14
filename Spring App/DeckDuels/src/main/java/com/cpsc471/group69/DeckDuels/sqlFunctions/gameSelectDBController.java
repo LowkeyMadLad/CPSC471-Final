@@ -60,6 +60,7 @@ public class gameSelectDBController {
     @CrossOrigin(origins = "*")
     public String startGame(@RequestBody String[] cards){
         // bot random cards
+        game = null;
         int randomhand = 100 + getRandomNumber(1, 8);
         int randombody = getRandomNumber(1, 8);
         try {
@@ -126,8 +127,12 @@ public class gameSelectDBController {
         boolean gameover = false;
         try {
             gameover = game.verifyTurn();
+            System.out.println(gameover);
         } catch (DBConnectException | SQLException e) {
             e.printStackTrace();
+        }
+        if(gameover){
+            game = null;
         }
 
         String jsonString = null;
@@ -147,7 +152,6 @@ public class gameSelectDBController {
         // p1 should be a boolean
         // true if player 1
         // false if it is the bot's hp you want
-        System.out.println(p1);
         double hp = 300.0;
         if(Boolean.parseBoolean(p1)){
             hp = game.getPlayer1().hp;

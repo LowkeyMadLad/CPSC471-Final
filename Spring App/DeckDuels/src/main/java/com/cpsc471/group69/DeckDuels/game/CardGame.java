@@ -257,6 +257,10 @@ public class CardGame {
      * @throws SQLException
      */
     public boolean verifyTurn() throws DBConnectException, SQLException{
+        if(gameover){
+            System.out.println("The game is over!!!");
+            return true;
+        }
         if (player1.hp <= 0 || player2.hp <= 0) {
             if(player1.hp <= 0){
                 // player 2 wins

@@ -251,14 +251,14 @@ async function onPlayerPress(string) {
     if (string === "defend" && !p1DefendLastTurn) {
         actionlog = await playerMove("false");
         updateActionLog(actionlog);
-        await hpUpdate();
+        hpUpdate();
         temp = await verifyGameState();
         p1DefendLastTurn = true;
         disableDefend();
     } else {
         actionlog = await playerMove("true");
         updateActionLog(actionlog);
-        await hpUpdate();
+        hpUpdate();
         temp = await verifyGameState();
         p1DefendLastTurn = false;
         enableDefend();
@@ -278,13 +278,13 @@ async function onPlayerPress(string) {
     if (botDefend && !p2DefendLastTurn) {
         actionlog = await playerMove("false");
         updateActionLog(actionlog);
-        await hpUpdate();
+        hpUpdate();
         temp = await verifyGameState();
         p2DefendLastTurn = true;
     } else {
         actionlog = await playerMove("true");
         updateActionLog(actionlog);
-        await hpUpdate();
+        hpUpdate();
         temp = await verifyGameState();
         p2DefendLastTurn = false;
     }

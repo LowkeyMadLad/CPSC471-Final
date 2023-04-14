@@ -195,6 +195,27 @@ public class gameSelectDBController {
         return jsonString;
     }
 
+    @PostMapping("game/quit")
+    @CrossOrigin(origins = "*")
+    public String quitGame(){
+        try {
+            game.quit(true);
+        } catch (DBConnectException | SQLException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        String jsonString = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            jsonString = mapper.writeValueAsString("player 1 quit successfully");
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return jsonString;
+    }
+
     // for random int between range
     private int getRandomNumber(int min, int max) {
         return (int) ((Math.random() * (max - min)) + min);

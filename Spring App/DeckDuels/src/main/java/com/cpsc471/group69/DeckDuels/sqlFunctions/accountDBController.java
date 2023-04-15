@@ -138,10 +138,17 @@ public class accountDBController {
             e.printStackTrace();
         }
 
+        String[] arr = new String[5];
+        arr[0] = acc.username;
+        arr[1] = acc.displayname;
+        arr[2] = String.valueOf(acc.wins);
+        arr[3] = String.valueOf(acc.losses);
+        arr[4] = String.valueOf(acc.mmr);
+
         String jsonStr = null;
         ObjectMapper mapper = new ObjectMapper();
         try{
-            jsonStr = mapper.writeValueAsString(acc);
+            jsonStr = mapper.writeValueAsString(arr);
         } catch (Exception e){
             e.printStackTrace();
         }

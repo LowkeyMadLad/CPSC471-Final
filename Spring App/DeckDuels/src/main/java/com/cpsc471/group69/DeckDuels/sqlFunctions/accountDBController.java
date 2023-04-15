@@ -193,7 +193,7 @@ public class accountDBController {
     public String replayGameDetails(@PathVariable(value = "gameID") String uuid){
         String game = "ERROR. GAME NOT FOUND.";
         try {
-            game = CardGame.replayGame(game);
+            game = CardGame.replayGame(uuid);
         } catch (DBConnectException | SQLException e) {
             e.printStackTrace();
         }

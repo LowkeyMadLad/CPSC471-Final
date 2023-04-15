@@ -346,7 +346,7 @@ public class CardGame {
         ArrayList<String> movelist = db.getGameMoves(gameID);
         for (String move : movelist){
             game += readMove(move) + "\n";
-            // System.out.println();
+            System.out.println(move);
         }
         return game;
     }

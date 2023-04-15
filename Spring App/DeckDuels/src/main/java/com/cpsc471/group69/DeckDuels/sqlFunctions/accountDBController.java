@@ -229,4 +229,30 @@ public class accountDBController {
         }
         return jsonStr;
     }
+
+    @PostMapping("/account/login")
+    @CrossOrigin(origins = "*")
+    public String login(@RequestBody String[] info){
+        String username = info[0];
+        String password = info[1];
+
+        boolean loginSuccess = false;
+        try {
+            loginSuccess = db.loginPlayer(username, password);
+        } catch (DBConnectException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString(loginSuccess);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
+    }
 }

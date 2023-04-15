@@ -19,13 +19,12 @@ public class CardGame {
     ArrayList<String> moves;
     Timestamp time;
 
-    private static CardDatabase db = null;
+    private static CardDatabase db = CardDatabase.getDB();
     private Scanner reader;
 
     public CardGame(Player p1, Player p2){
         player1 = p1;
         player2 = p2;
-        db = CardDatabase.getDB();
         moves = new ArrayList<String>();
         gameover = false;
         // view

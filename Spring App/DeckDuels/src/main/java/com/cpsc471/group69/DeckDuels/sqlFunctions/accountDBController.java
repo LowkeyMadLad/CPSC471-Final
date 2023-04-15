@@ -203,4 +203,30 @@ public class accountDBController {
         }
         return jsonStr;
     }
+
+    @PostMapping("/account/create")
+    @CrossOrigin(origins = "*")
+    public String createAccount(@RequestBody String[] info){
+        String username = info[0];
+        String password = info[1];
+        String displayName = info[2];
+
+        try {
+            db.createPlayer(username, password, displayName);
+        } catch (DBConnectException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        String jsonStr = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            jsonStr = mapper.writeValueAsString("account create confirm!");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        if (jsonStr == null){
+            throw new IllegalArgumentException();
+        }
+        return jsonStr;
+    }
 }

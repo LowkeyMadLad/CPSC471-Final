@@ -344,6 +344,7 @@ public class CardGame {
     public static String replayGame(String gameID) throws DBConnectException, SQLException{
         String game = "";
         ArrayList<String> movelist = db.getGameMoves(gameID);
+        System.out.println(movelist.toArray());
         for (String move : movelist){
             game += readMove(move) + "\n";
             System.out.println(move);

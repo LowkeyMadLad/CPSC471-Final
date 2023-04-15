@@ -4,8 +4,11 @@ const username = "dannyp";
 formatPage()
 
 async function formatPage(){
+    mainBox = document.getElementById("main-box");
     var strings = await getSeasonInfo();
-    console.log(strings)
+    for (let i = 0; i < strings.length; i++) {
+        mainBox.innerHTML += formatHTML(strings[i]);
+    }
 }
 
 
@@ -23,10 +26,10 @@ async function getSeasonInfo(){
 }
 
 
-function formatHTML(seasonNumber, peakMMR, gamesPlayed){
+function formatHTML(string){
     var htmlCard = `
     <div class="season-box">
-        <p style="font-size: 24px;">Season: ${seasonNumber}   |   Peak MMR: ${peakMMR}   |   Total Games Played: ${gamesPlayed}</p>
+        <p style="font-size: 24px;">${string}</p>
     </div>
     `
     return htmlCard;

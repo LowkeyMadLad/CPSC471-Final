@@ -1,0 +1,52 @@
+
+
+input[type=text] {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: grey 2px solid;
+}
+input[type=password] {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: grey 2px solid;
+}
+
+.holder-box {
+    width: 50%;
+    margin: auto;
+    padding: 50px;
+    outline: black 5px solid;
+    align-items: center;
+}
+.button-general{
+    padding: 12px 20px;
+    margin: 8px 0;
+    min-width: 150px;
+}
+.player-stats{
+    text-align: center;
+    outline: black 5px solid;
+    width: 90%;
+    margin: auto;
+}
+
+.history-box{
+    width: 90%;
+    height: 200px;
+    margin: auto;
+    outline: black 5px solid;
+}
+.history-align{
+    display: inline-block;
+    width: 1fr;
+    padding-top: 5px;
+    margin: auto;
+}
+.action-box{
+    outline: black 2px solid;
+}
+

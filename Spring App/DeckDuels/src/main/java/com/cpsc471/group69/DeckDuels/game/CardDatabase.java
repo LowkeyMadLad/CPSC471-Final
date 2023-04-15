@@ -181,12 +181,12 @@ public class CardDatabase {
 
     // for accounts
     public void createPlayer(String username, String password, String displayname) throws DBConnectException, SQLException {
-        initializeConnection();
-
         // Check if the username already exists
         if (checkPlayerExists(username)) {
             throw new IllegalArgumentException("Username already exists.");
         }
+
+        initializeConnection();
 
         // Insert the new player into the Player table
         String query = "INSERT INTO Player (username, password, wins, losses, mmr, displayname) VALUES (?, ?, ?, ?, ?, ?)";

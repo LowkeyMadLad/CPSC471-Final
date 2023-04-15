@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{css/default.css}">
+    <link rel="stylesheet" th:href="@{css/accountStyle.css}">
+    <script defer th:src="@{js/accountApp.js}"></script>
 </head>
 <body>
     <div class="container" id="page-main">
@@ -26,24 +28,38 @@
             </nav>
         </div>
         <div id="content-body" class="content-main">
-            <h1>Account</h1>
-            <div id="login-form">
-                <h1>Login</h1>
-                <form th:action="@{/accountlogin}" method="post">
-                    <input type="text" id="username" placeholder="Username">
-                    <input type="password" id="password" placeholder="Password">
-                    <input type="submit" id="login-btn" value="Login">
-                </form>
+            <div class="page-title" id="page-title">
+                <h1>Account</h1>
             </div>
-            <div id="create-account">
-                <h1>Create Account</h1>
-                <form th:action="@{/accountcreate}">
-                    <input type="text" id="username" placeholder="New Username">
-                    <input type="text" id="password" placeholder="Password">
-                    <input type="text" id="displayName" placeholder="Display Name">
-                    <input type="submit" id="create-button" value="Create Account">
-                </form>
+            <div id="loginAndSignUp">
+                <div id="login-form">
+                    <div id="login-fields" class="holder-box">
+                        <h1 style="text-align: center; font-size: 36px; padding: 25px;">Login</h1>
+                        <input type="text" id="login-username" placeholder="Username" class="align-elements">
+                        <input type="password" id="login-password" placeholder="Password" class="align-elements">
+                        <button id="login-submit" class="align-elements button-general">Login</button>
+                    </div>
+                </div>
+                <div id="create-account-form">
+                    <div id="create-fields" class="holder-box">
+                        <h1 style="text-align: center; font-size: 36px; padding: 25px;">Create Account</h1>
+                        <input type="text" id="create-username" placeholder="New Username" class="align-elements">
+                        <input type="password" id="create-password" placeholder="Password" class="align-elements">
+                        <input type="text" id="create-displayName" placeholder="Display Name" class="align-elements">
+                        <button id="create-account-submit" class="align-elements button-general">Create Account</button>
+                    </div>
+                        
+                </div>
             </div>
+
+            <div id="account-info">
+
+            </div>
+            <div id="match-history" class="match-history">
+                
+            </div>
+            
+
         </div>
     </div>
 </body>
